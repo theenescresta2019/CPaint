@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace CPaint
@@ -19,7 +14,7 @@ namespace CPaint
 		private TabPage tabPage;
 		Color canvasColor = Color.Gray;
 		Color textColor = Color.White;
-		Font font = new Font("Arial", 12, FontStyle.Bold);
+		Font font = new Font("Arial", 16, FontStyle.Bold);
 		private RichTextBox GetActiveEditor()
 		{
 			tabPage = TabControl.SelectedTab;
@@ -35,13 +30,15 @@ namespace CPaint
 		private void CreateNewDocument()
 		{
 			tabPage = new TabPage("Untitled Paint Document");
-			
-			RichTextBox textBox = new RichTextBox();
-			textBox.SelectionFont =font;
-		//	textBox.SelectionColor = System.Drawing.Color.Black;
-			textBox.Dock = DockStyle.Fill;
-			textBox.ForeColor = textColor;
-			textBox.BackColor = canvasColor;
+
+			RichTextBox textBox = new RichTextBox
+			{
+				SelectionFont = font,
+				//	textBox.SelectionColor = System.Drawing.Color.Black;
+				Dock = DockStyle.Fill,
+				ForeColor = textColor,
+				BackColor = canvasColor
+			};
 			tabPage.Controls.Add(textBox);
 			tabPage.Focus();
 			TabControl.TabPages.Add(tabPage);
@@ -79,20 +76,27 @@ namespace CPaint
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			tabPage = new TabPage("Welcome in CPaint");
+			tabPage = new TabPage("Welcome To CPaint")
+			{
 
-			RichTextBox textBox = new RichTextBox();
-			textBox.Font = new Font("Arial", 24, FontStyle.Bold);
-			//	textBox.SelectionColor = System.Drawing.Color.Black;
-			textBox.Dock = DockStyle.Fill;
-			textBox.ForeColor = Color.AntiqueWhite;
-			textBox.BackColor = canvasColor;
+				//	RichTextBox textBox = new RichTextBox();
+				//textBox.Font = new Font("Arial", 24, FontStyle.Bold);
+				////	textBox.SelectionColor = System.Drawing.Color.Black;
+				//textBox.Dock = DockStyle.Fill;
+				//textBox.ForeColor = Color.AntiqueWhite;
+				//textBox.BackColor = canvasColor;
 
-			textBox.Text = "Hello! user"+ "Welcome to CPaint."+ "You Cant";
-			tabPage.Controls.Add(textBox);
+				//textBox.Text = "Hello! "+ " Welcome to CPaint." ;
+				//	tabPage.Controls.Add(textBox);
+				BackgroundImage = Image.FromFile("D:\\.net\\CPaint\\icons\\cpaintWelcome.jpg"),
+				//	BackColor = ColorTranslator.FromHtml("#808080"),
+				BackColor = (Color.BlanchedAlmond),
+				BackgroundImageLayout = ImageLayout.Center
+			};
 			tabPage.Focus();
+//			TabControl.BackgroundImage = ;
 			TabControl.TabPages.Add(tabPage);
-			TabControl.SelectTab(tabPage);
+		//	TabControl.SelectTab(tabPage);
 
 		}
 
@@ -225,9 +229,60 @@ namespace CPaint
 			}
 		}
 
+		private void SaveFile()
+		{
+			SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+			saveFileDialog1.InitialDirectory = "D:";
+			saveFileDialog1.RestoreDirectory = true;
+			saveFileDialog1.Title = "Save File";
+			//	saveFileDialog1.CheckFileExists = true;
+			//	saveFileDialog1.CheckPathExists = true;
+			saveFileDialog1.DefaultExt = "txt";
+			saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+		//	saveFileDialog1.FilterIndex = 1;
+			saveFileDialog1.RestoreDirectory = true;
+			if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+			{
+				using (Stream s = File.Open(saveFileDialog1.FileName, FileMode.CreateNew))
+
+				using (StreamWriter sw=new StreamWriter(s))
+				{
+					//sw.Write(GetActiveEditor().Text);
+					var fileName = saveFileDialog1.FileName;
+					tabPage = new TabPage(fileName);
+					RichTextBox textBox = new RichTextBox();
+					textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
+					textBox.SelectionFont = font;
+					//	textBox.SelectionColor = System.Drawing.Color.Black;
+					textBox.Dock = DockStyle.Fill;
+					textBox.ForeColor = textColor;
+					textBox.BackColor = canvasColor;
+					tabPage.Controls.Add(textBox);
+					tabPage.Focus();
+					TabControl.TabPages.Add(tabPage);
+					TabControl.SelectTab(tabPage);
+					RemoveCurrentDocument();
+				}
+
+
+
+
+
+			}
+		}
+
 		private void ToolStripButton2_Click(object sender, EventArgs e)
 		{
+			try
+			{
+				SaveFile();
 
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Cannot Save Document." + ex.Message);
+				Console.WriteLine("Exception Message: " + ex.Message);
+			}
 		}
 
 		private void ToolStripButton4_Click(object sender, EventArgs e)
@@ -374,17 +429,19 @@ namespace CPaint
 			}
 		}
 
-		private void toolStripMenuItem2_Click(object sender, EventArgs e)
+		private void ToolStripMenuItem2_Click(object sender, EventArgs e)
 		{
 
 		}
 
+#pragma warning disable IDE1006 // Naming Styles
 		private void toolStripMenuItem9_Click(object sender, EventArgs e)
+#pragma warning restore IDE1006 // Naming Styles
 		{
 
 		}
 
-		private void toolStripButton1_Click_2(object sender, EventArgs e)
+		private void ToolStripButton1_Click_2(object sender, EventArgs e)
 		{
 			try
 			{
@@ -402,7 +459,7 @@ namespace CPaint
 			}
 		}
 
-		private void toolStripButton2_Click_1(object sender, EventArgs e)
+		private void ToolStripButton2_Click_1(object sender, EventArgs e)
 		{
 			try
 			{
@@ -420,7 +477,7 @@ namespace CPaint
 			}
 		}
 
-		private void toolStripMenuItem5_Click(object sender, EventArgs e)
+		private void ToolStripMenuItem5_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -438,7 +495,7 @@ namespace CPaint
 			}
 		}
 
-		private void toolStripMenuItem4_Click(object sender, EventArgs e)
+		private void ToolStripMenuItem4_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -456,11 +513,13 @@ namespace CPaint
 			}
 		}
 
-		private void toolStripButton1_Click_3(object sender, EventArgs e)
+		private void ToolStripButton1_Click_3(object sender, EventArgs e)
 		{
-			FontDialog f = new FontDialog();
-			f.ShowColor = true;
-			if(f.ShowDialog()== DialogResult.OK){
+			FontDialog f = new FontDialog
+			{
+				ShowColor = true
+			};
+			if (f.ShowDialog()== DialogResult.OK){
 				GetActiveEditor().SelectAll();
 				GetActiveEditor().SelectionFont = f.Font;
 				GetActiveEditor().SelectionColor = f.Color;
@@ -470,20 +529,22 @@ namespace CPaint
 
 		}
 
-		private void toolStripButton1_Click_4(object sender, EventArgs e)
+		private void ToolStripButton1_Click_4(object sender, EventArgs e)
 		{
 
 			try
 			{
-				ColorDialog color = new ColorDialog();
-				color.AllowFullOpen = false;
+				ColorDialog color = new ColorDialog
+				{
+					AllowFullOpen = false
+				};
 
 				if (color.ShowDialog() == DialogResult.OK)
 				{
 
+					canvasColor = color.Color;
 					ToolBtnBgColor.BackColor = color.Color;
 					GetActiveEditor().BackColor = color.Color;
-					canvasColor = color.Color;
 					//listBox1.ForeColor = colorDlg.Color;
 				}
 			}
@@ -494,6 +555,71 @@ namespace CPaint
 			}
 			
 
+		}
+
+		private void BtnSave_Click(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void OpenFile()
+		{
+			OpenFileDialog openFD = new OpenFileDialog
+			{
+				InitialDirectory = "D:",
+				Title = "Open a Text File",
+				FileName = "",
+				Filter = "Text Files|*.txt|Word Documents|*.doc"
+			};
+			if (openFD.ShowDialog() != DialogResult.Cancel)
+			{
+				string Chosen_File = openFD.FileName;
+				tabPage = new TabPage(Chosen_File);
+				RichTextBox textBox = new RichTextBox();
+				textBox.LoadFile(Chosen_File, RichTextBoxStreamType.PlainText);
+				textBox.SelectionFont = font;
+				//	textBox.SelectionColor = System.Drawing.Color.Black;
+				textBox.Dock = DockStyle.Fill;
+				textBox.ForeColor = textColor;
+				textBox.BackColor = canvasColor;
+				tabPage.Controls.Add(textBox);
+				tabPage.Focus();
+				TabControl.TabPages.Add(tabPage);
+				TabControl.SelectTab(tabPage);
+			}
+		}
+
+
+		private void BtnOpen_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				OpenFile();
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine("Exception Message: " + ex.Message);
+			}
+
+		}
+
+		private void ToolStripButton1_Click_5(object sender, EventArgs e)
+		{
+
+		}
+
+		private void ToolBtnOpen_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				OpenFile();
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine("Exception Message: " + ex.Message);
+			}
 		}
 	}
 }

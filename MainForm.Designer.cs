@@ -39,6 +39,27 @@
 			this.BtnCloseAllTabs = new System.Windows.Forms.ToolStripMenuItem();
 			this.BtnShare = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.BtnCopy = new System.Windows.Forms.ToolStripMenuItem();
+			this.BtnCut = new System.Windows.Forms.ToolStripMenuItem();
+			this.BtnPaste = new System.Windows.Forms.ToolStripMenuItem();
+			this.BtnSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+			this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
 			this.TabControl = new System.Windows.Forms.TabControl();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.ToolBtnAddNew = new System.Windows.Forms.ToolStripButton();
@@ -54,35 +75,15 @@
 			this.ToolBtnUndo = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnRedo = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.ToolBtnRun = new System.Windows.Forms.ToolStripButton();
-			this.BtnCopy = new System.Windows.Forms.ToolStripMenuItem();
-			this.BtnCut = new System.Windows.Forms.ToolStripMenuItem();
-			this.BtnPaste = new System.Windows.Forms.ToolStripMenuItem();
-			this.BtnSelectAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBtnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.ToolBtnDebug = new System.Windows.Forms.ToolStripButton();
+			this.ToolBtnRun = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolBtnSetFont = new System.Windows.Forms.ToolStripButton();
-			this.ToolBtnDebug = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnBgColor = new System.Windows.Forms.ToolStripButton();
+			this.ToolBtnOpen = new System.Windows.Forms.ToolStripButton();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -137,6 +138,7 @@
 			this.BtnOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.BtnOpen.Size = new System.Drawing.Size(243, 22);
 			this.BtnOpen.Text = "Open";
+			this.BtnOpen.Click += new System.EventHandler(this.BtnOpen_Click);
 			// 
 			// BtnSave
 			// 
@@ -145,6 +147,7 @@
 			this.BtnSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.BtnSave.Size = new System.Drawing.Size(243, 22);
 			this.BtnSave.Text = "Save";
+			this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
 			// 
 			// BtnSaveAs
 			// 
@@ -191,6 +194,216 @@
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
+			this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BtnCopy,
+            this.BtnCut,
+            this.BtnPaste,
+            this.BtnSelectAll,
+            this.redoToolStripMenuItem,
+            this.undoToolStripMenuItem});
+			this.toolStripMenuItem1.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripMenuItem1.ForeColor = System.Drawing.Color.AliceBlue;
+			this.toolStripMenuItem1.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 22);
+			this.toolStripMenuItem1.Text = "Edit";
+			this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
+			// 
+			// BtnCopy
+			// 
+			this.BtnCopy.Image = ((System.Drawing.Image)(resources.GetObject("BtnCopy.Image")));
+			this.BtnCopy.Name = "BtnCopy";
+			this.BtnCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+			this.BtnCopy.Size = new System.Drawing.Size(181, 22);
+			this.BtnCopy.Text = "Copy";
+			this.BtnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
+			// 
+			// BtnCut
+			// 
+			this.BtnCut.Image = ((System.Drawing.Image)(resources.GetObject("BtnCut.Image")));
+			this.BtnCut.Name = "BtnCut";
+			this.BtnCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+			this.BtnCut.Size = new System.Drawing.Size(181, 22);
+			this.BtnCut.Text = "Cut";
+			this.BtnCut.Click += new System.EventHandler(this.BtnCut_Click);
+			// 
+			// BtnPaste
+			// 
+			this.BtnPaste.Image = ((System.Drawing.Image)(resources.GetObject("BtnPaste.Image")));
+			this.BtnPaste.Name = "BtnPaste";
+			this.BtnPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+			this.BtnPaste.Size = new System.Drawing.Size(181, 22);
+			this.BtnPaste.Text = "Paste";
+			this.BtnPaste.Click += new System.EventHandler(this.BtnPaste_Click);
+			// 
+			// BtnSelectAll
+			// 
+			this.BtnSelectAll.Image = ((System.Drawing.Image)(resources.GetObject("BtnSelectAll.Image")));
+			this.BtnSelectAll.Name = "BtnSelectAll";
+			this.BtnSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+			this.BtnSelectAll.Size = new System.Drawing.Size(181, 22);
+			this.BtnSelectAll.Text = "Select All";
+			this.BtnSelectAll.Click += new System.EventHandler(this.BtnSelectAll_Click);
+			// 
+			// redoToolStripMenuItem
+			// 
+			this.redoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("redoToolStripMenuItem.Image")));
+			this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+			this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+			this.redoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+			this.redoToolStripMenuItem.Text = "Redo";
+			this.redoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
+			// 
+			// undoToolStripMenuItem
+			// 
+			this.undoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("undoToolStripMenuItem.Image")));
+			this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+			this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+			this.undoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+			this.undoToolStripMenuItem.Text = "Undo";
+			this.undoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.BackColor = System.Drawing.Color.Transparent;
+			this.toolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8});
+			this.toolStripMenuItem2.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripMenuItem2.ForeColor = System.Drawing.Color.AliceBlue;
+			this.toolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(53, 22);
+			this.toolStripMenuItem2.Text = "Tools";
+			this.toolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2_Click);
+			// 
+			// toolStripMenuItem6
+			// 
+			this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
+			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			this.toolStripMenuItem6.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+			this.toolStripMenuItem6.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem6.Text = "Debug";
+			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem3.Text = "Run";
+			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem5.Text = "Zoom In";
+			this.toolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenuItem5_Click);
+			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			this.toolStripMenuItem4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem4.Text = "Zoom Out";
+			this.toolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
+			// 
+			// toolStripMenuItem7
+			// 
+			this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
+			this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+			this.toolStripMenuItem7.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+			this.toolStripMenuItem7.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem7.Text = "Redo";
+			// 
+			// toolStripMenuItem8
+			// 
+			this.toolStripMenuItem8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem8.Image")));
+			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+			this.toolStripMenuItem8.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+			this.toolStripMenuItem8.Size = new System.Drawing.Size(244, 22);
+			this.toolStripMenuItem8.Text = "Undo";
+			// 
+			// toolStripMenuItem9
+			// 
+			this.toolStripMenuItem9.BackColor = System.Drawing.Color.Transparent;
+			this.toolStripMenuItem9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.toolStripMenuItem9.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem10,
+            this.toolStripMenuItem11,
+            this.toolStripMenuItem12,
+            this.toolStripMenuItem13,
+            this.toolStripMenuItem14,
+            this.toolStripMenuItem15});
+			this.toolStripMenuItem9.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripMenuItem9.ForeColor = System.Drawing.Color.AliceBlue;
+			this.toolStripMenuItem9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem9.Image")));
+			this.toolStripMenuItem9.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+			this.toolStripMenuItem9.Size = new System.Drawing.Size(66, 22);
+			this.toolStripMenuItem9.Text = "Help";
+			this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+			// 
+			// toolStripMenuItem10
+			// 
+			this.toolStripMenuItem10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem10.Image")));
+			this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+			this.toolStripMenuItem10.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+			this.toolStripMenuItem10.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem10.Text = "Copy";
+			// 
+			// toolStripMenuItem11
+			// 
+			this.toolStripMenuItem11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem11.Image")));
+			this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+			this.toolStripMenuItem11.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+			this.toolStripMenuItem11.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem11.Text = "Cut";
+			// 
+			// toolStripMenuItem12
+			// 
+			this.toolStripMenuItem12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem12.Image")));
+			this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+			this.toolStripMenuItem12.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+			this.toolStripMenuItem12.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem12.Text = "Paste";
+			// 
+			// toolStripMenuItem13
+			// 
+			this.toolStripMenuItem13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem13.Image")));
+			this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+			this.toolStripMenuItem13.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+			this.toolStripMenuItem13.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem13.Text = "Select All";
+			// 
+			// toolStripMenuItem14
+			// 
+			this.toolStripMenuItem14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem14.Image")));
+			this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+			this.toolStripMenuItem14.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+			this.toolStripMenuItem14.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem14.Text = "Redo";
+			// 
+			// toolStripMenuItem15
+			// 
+			this.toolStripMenuItem15.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem15.Image")));
+			this.toolStripMenuItem15.Name = "toolStripMenuItem15";
+			this.toolStripMenuItem15.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+			this.toolStripMenuItem15.Size = new System.Drawing.Size(181, 22);
+			this.toolStripMenuItem15.Text = "Undo";
+			// 
 			// TabControl
 			// 
 			this.TabControl.AllowDrop = true;
@@ -207,6 +420,7 @@
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolBtnAddNew,
             this.ToolBtnSave,
+            this.ToolBtnOpen,
             this.ToolBtnClose,
             this.ToolBtnCloseAll,
             this.ToolBtnSelectAll,
@@ -357,226 +571,6 @@
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
 			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
 			// 
-			// ToolBtnRun
-			// 
-			this.ToolBtnRun.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToolBtnRun.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnRun.Image")));
-			this.ToolBtnRun.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolBtnRun.Name = "ToolBtnRun";
-			this.ToolBtnRun.Size = new System.Drawing.Size(23, 22);
-			this.ToolBtnRun.Text = "ToolBtnRun";
-			this.ToolBtnRun.ToolTipText = "Run/Execute (Ctrl + R)";
-			// 
-			// BtnCopy
-			// 
-			this.BtnCopy.Image = ((System.Drawing.Image)(resources.GetObject("BtnCopy.Image")));
-			this.BtnCopy.Name = "BtnCopy";
-			this.BtnCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.BtnCopy.Size = new System.Drawing.Size(181, 22);
-			this.BtnCopy.Text = "Copy";
-			this.BtnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
-			// 
-			// BtnCut
-			// 
-			this.BtnCut.Image = ((System.Drawing.Image)(resources.GetObject("BtnCut.Image")));
-			this.BtnCut.Name = "BtnCut";
-			this.BtnCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.BtnCut.Size = new System.Drawing.Size(181, 22);
-			this.BtnCut.Text = "Cut";
-			this.BtnCut.Click += new System.EventHandler(this.BtnCut_Click);
-			// 
-			// BtnPaste
-			// 
-			this.BtnPaste.Image = ((System.Drawing.Image)(resources.GetObject("BtnPaste.Image")));
-			this.BtnPaste.Name = "BtnPaste";
-			this.BtnPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.BtnPaste.Size = new System.Drawing.Size(181, 22);
-			this.BtnPaste.Text = "Paste";
-			this.BtnPaste.Click += new System.EventHandler(this.BtnPaste_Click);
-			// 
-			// BtnSelectAll
-			// 
-			this.BtnSelectAll.Image = ((System.Drawing.Image)(resources.GetObject("BtnSelectAll.Image")));
-			this.BtnSelectAll.Name = "BtnSelectAll";
-			this.BtnSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.BtnSelectAll.Size = new System.Drawing.Size(181, 22);
-			this.BtnSelectAll.Text = "Select All";
-			this.BtnSelectAll.Click += new System.EventHandler(this.BtnSelectAll_Click);
-			// 
-			// redoToolStripMenuItem
-			// 
-			this.redoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("redoToolStripMenuItem.Image")));
-			this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-			this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-			this.redoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-			this.redoToolStripMenuItem.Text = "Redo";
-			this.redoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
-			// 
-			// undoToolStripMenuItem
-			// 
-			this.undoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("undoToolStripMenuItem.Image")));
-			this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-			this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-			this.undoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-			this.undoToolStripMenuItem.Text = "Undo";
-			this.undoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
-			// 
-			// toolStripMenuItem1
-			// 
-			this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
-			this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnCopy,
-            this.BtnCut,
-            this.BtnPaste,
-            this.BtnSelectAll,
-            this.redoToolStripMenuItem,
-            this.undoToolStripMenuItem});
-			this.toolStripMenuItem1.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripMenuItem1.ForeColor = System.Drawing.Color.AliceBlue;
-			this.toolStripMenuItem1.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 22);
-			this.toolStripMenuItem1.Text = "Edit";
-			this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
-			// 
-			// toolStripMenuItem2
-			// 
-			this.toolStripMenuItem2.BackColor = System.Drawing.Color.Transparent;
-			this.toolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem5,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8});
-			this.toolStripMenuItem2.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripMenuItem2.ForeColor = System.Drawing.Color.AliceBlue;
-			this.toolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(53, 22);
-			this.toolStripMenuItem2.Text = "Tools";
-			this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-			// 
-			// toolStripMenuItem3
-			// 
-			this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
-			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-			this.toolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-			this.toolStripMenuItem3.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem3.Text = "Run";
-			// 
-			// toolStripMenuItem4
-			// 
-			this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
-			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem4.Text = "Zoom Out";
-			this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-			// 
-			// toolStripMenuItem5
-			// 
-			this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
-			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem5.Text = "Zoom In";
-			this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
-			// 
-			// toolStripMenuItem6
-			// 
-			this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
-			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-			this.toolStripMenuItem6.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-			this.toolStripMenuItem6.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem6.Text = "Debug";
-			// 
-			// toolStripMenuItem7
-			// 
-			this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
-			this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-			this.toolStripMenuItem7.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-			this.toolStripMenuItem7.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem7.Text = "Redo";
-			// 
-			// toolStripMenuItem8
-			// 
-			this.toolStripMenuItem8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem8.Image")));
-			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-			this.toolStripMenuItem8.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-			this.toolStripMenuItem8.Size = new System.Drawing.Size(244, 22);
-			this.toolStripMenuItem8.Text = "Undo";
-			// 
-			// toolStripMenuItem9
-			// 
-			this.toolStripMenuItem9.BackColor = System.Drawing.Color.Transparent;
-			this.toolStripMenuItem9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.toolStripMenuItem9.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem10,
-            this.toolStripMenuItem11,
-            this.toolStripMenuItem12,
-            this.toolStripMenuItem13,
-            this.toolStripMenuItem14,
-            this.toolStripMenuItem15});
-			this.toolStripMenuItem9.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripMenuItem9.ForeColor = System.Drawing.Color.AliceBlue;
-			this.toolStripMenuItem9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem9.Image")));
-			this.toolStripMenuItem9.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-			this.toolStripMenuItem9.Size = new System.Drawing.Size(66, 22);
-			this.toolStripMenuItem9.Text = "Help";
-			this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
-			// 
-			// toolStripMenuItem10
-			// 
-			this.toolStripMenuItem10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem10.Image")));
-			this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-			this.toolStripMenuItem10.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.toolStripMenuItem10.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem10.Text = "Copy";
-			// 
-			// toolStripMenuItem11
-			// 
-			this.toolStripMenuItem11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem11.Image")));
-			this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-			this.toolStripMenuItem11.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.toolStripMenuItem11.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem11.Text = "Cut";
-			// 
-			// toolStripMenuItem12
-			// 
-			this.toolStripMenuItem12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem12.Image")));
-			this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-			this.toolStripMenuItem12.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.toolStripMenuItem12.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem12.Text = "Paste";
-			// 
-			// toolStripMenuItem13
-			// 
-			this.toolStripMenuItem13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem13.Image")));
-			this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-			this.toolStripMenuItem13.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.toolStripMenuItem13.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem13.Text = "Select All";
-			// 
-			// toolStripMenuItem14
-			// 
-			this.toolStripMenuItem14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem14.Image")));
-			this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-			this.toolStripMenuItem14.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-			this.toolStripMenuItem14.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem14.Text = "Redo";
-			// 
-			// toolStripMenuItem15
-			// 
-			this.toolStripMenuItem15.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem15.Image")));
-			this.toolStripMenuItem15.Name = "toolStripMenuItem15";
-			this.toolStripMenuItem15.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-			this.toolStripMenuItem15.Size = new System.Drawing.Size(181, 22);
-			this.toolStripMenuItem15.Text = "Undo";
-			// 
 			// ToolBtnZoomIn
 			// 
 			this.ToolBtnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -586,7 +580,7 @@
 			this.ToolBtnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.ToolBtnZoomIn.Text = "ToolBtnZoomIn";
 			this.ToolBtnZoomIn.ToolTipText = "Zoom In (Ctrl + +)";
-			this.ToolBtnZoomIn.Click += new System.EventHandler(this.toolStripButton1_Click_2);
+			this.ToolBtnZoomIn.Click += new System.EventHandler(this.ToolStripButton1_Click_2);
 			// 
 			// ToolBtnZoomOut
 			// 
@@ -597,12 +591,32 @@
 			this.ToolBtnZoomOut.Size = new System.Drawing.Size(23, 22);
 			this.ToolBtnZoomOut.Text = "ToolBtnZoomOut";
 			this.ToolBtnZoomOut.ToolTipText = "Zoom Out (Ctrl + -)";
-			this.ToolBtnZoomOut.Click += new System.EventHandler(this.toolStripButton2_Click_1);
+			this.ToolBtnZoomOut.Click += new System.EventHandler(this.ToolStripButton2_Click_1);
 			// 
 			// toolStripSeparator4
 			// 
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
 			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+			// 
+			// ToolBtnDebug
+			// 
+			this.ToolBtnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToolBtnDebug.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnDebug.Image")));
+			this.ToolBtnDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToolBtnDebug.Name = "ToolBtnDebug";
+			this.ToolBtnDebug.Size = new System.Drawing.Size(23, 22);
+			this.ToolBtnDebug.Text = "ToolBtnDebug";
+			this.ToolBtnDebug.ToolTipText = "Debug (Ctrl + D)";
+			// 
+			// ToolBtnRun
+			// 
+			this.ToolBtnRun.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToolBtnRun.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnRun.Image")));
+			this.ToolBtnRun.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToolBtnRun.Name = "ToolBtnRun";
+			this.ToolBtnRun.Size = new System.Drawing.Size(23, 22);
+			this.ToolBtnRun.Text = "ToolBtnRun";
+			this.ToolBtnRun.ToolTipText = "Run/Execute (Ctrl + R)";
 			// 
 			// toolStripSeparator5
 			// 
@@ -616,17 +630,7 @@
 			this.ToolBtnSetFont.Name = "ToolBtnSetFont";
 			this.ToolBtnSetFont.Size = new System.Drawing.Size(70, 22);
 			this.ToolBtnSetFont.Text = "Set Font";
-			this.ToolBtnSetFont.Click += new System.EventHandler(this.toolStripButton1_Click_3);
-			// 
-			// ToolBtnDebug
-			// 
-			this.ToolBtnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToolBtnDebug.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnDebug.Image")));
-			this.ToolBtnDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolBtnDebug.Name = "ToolBtnDebug";
-			this.ToolBtnDebug.Size = new System.Drawing.Size(23, 22);
-			this.ToolBtnDebug.Text = "ToolBtnDebug";
-			this.ToolBtnDebug.ToolTipText = "Debug (Ctrl + D)";
+			this.ToolBtnSetFont.Click += new System.EventHandler(this.ToolStripButton1_Click_3);
 			// 
 			// ToolBtnBgColor
 			// 
@@ -636,7 +640,18 @@
 			this.ToolBtnBgColor.Size = new System.Drawing.Size(123, 22);
 			this.ToolBtnBgColor.Text = "Background Color";
 			this.ToolBtnBgColor.ToolTipText = "Change Background Color";
-			this.ToolBtnBgColor.Click += new System.EventHandler(this.toolStripButton1_Click_4);
+			this.ToolBtnBgColor.Click += new System.EventHandler(this.ToolStripButton1_Click_4);
+			// 
+			// ToolBtnOpen
+			// 
+			this.ToolBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToolBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnOpen.Image")));
+			this.ToolBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToolBtnOpen.Name = "ToolBtnOpen";
+			this.ToolBtnOpen.Size = new System.Drawing.Size(23, 22);
+			this.ToolBtnOpen.Text = "Open File";
+			this.ToolBtnOpen.ToolTipText = "Open File (Ctrl + O)";
+			this.ToolBtnOpen.Click += new System.EventHandler(this.ToolBtnOpen_Click);
 			// 
 			// MainForm
 			// 
@@ -719,6 +734,7 @@
 		private System.Windows.Forms.ToolStripButton ToolBtnSetFont;
 		private System.Windows.Forms.ToolStripButton ToolBtnDebug;
 		private System.Windows.Forms.ToolStripButton ToolBtnBgColor;
+		private System.Windows.Forms.ToolStripButton ToolBtnOpen;
 	}
 }
 

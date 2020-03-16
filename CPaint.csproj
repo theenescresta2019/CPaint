@@ -82,6 +82,7 @@
   <ItemGroup>
     <Content Include="icons\Add_grey_16x.png" />
     <Content Include="icons\Close_red_16x.png" />
+    <Content Include="icons\cpaintWelcome.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
