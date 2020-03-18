@@ -15,6 +15,10 @@ namespace CPaint
 		Color canvasColor = Color.Gray;
 		Color textColor = Color.White;
 		Font font = new Font("Arial", 16, FontStyle.Bold);
+		/// <summary>
+		/// get Active Editor in the tab.
+		/// </summary>
+		/// <returns>Returns Active Editor in the TAB.</returns>
 		private RichTextBox GetActiveEditor()
 		{
 			tabPage = TabControl.SelectedTab;
@@ -23,10 +27,22 @@ namespace CPaint
 			{
 				rtb = tabPage.Controls[0] as RichTextBox;
 			}
-			
+
 			return rtb;
 		}
 
+
+
+
+		//private RichTextBox GetActiveTabName()
+		//{
+		//string	tabName = TabControl.SelectedTab.Name;
+
+		//	return tabName;
+		//}
+		/// <summary>
+		/// Create new documents 
+		/// </summary>
 		private void CreateNewDocument()
 		{
 			tabPage = new TabPage("Untitled Paint Document");
@@ -39,23 +55,239 @@ namespace CPaint
 				ForeColor = textColor,
 				BackColor = canvasColor
 			};
+
 			tabPage.Controls.Add(textBox);
+			tabPage.Name = "New";
 			tabPage.Focus();
 			TabControl.TabPages.Add(tabPage);
 			TabControl.SelectTab(tabPage);
-			
+
 		}
 
-		private void RemoveCurrentDocument()
+		/// <summary>
+		/// To save file.
+		/// </summary>
+		private void SaveFile()
 		{
-			if(TabControl.SelectedTab != null)
-			{
 
-			TabControl.TabPages.Remove(TabControl.SelectedTab);
+			//			string name = GetActiveEditor().Name;
+			//string tabName = TabControl.SelectedTab.Name;
+			//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
+			//	MessageBox.Show(TabControl.SelectedTab.Name);
+
+			string tabName = TabControl.SelectedTab.Name;
+			if (tabName == "New")
+			{
+				SaveFileDialog saveFileDialog = new SaveFileDialog
+				{
+					InitialDirectory = @"D:\",
+					Title = "Save text Files",
+					CheckFileExists = false,
+					CheckPathExists = false,
+					DefaultExt = "txt",
+					RestoreDirectory = true,
+					Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+					FilterIndex = 1,
+					AddExtension = true
+				};
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					string fileName = saveFileDialog.FileName;
+					GetActiveEditor().SaveFile(fileName, RichTextBoxStreamType.PlainText);
+
+					RemoveCurrentDocument();
+					//sw.Write(GetActiveEditor().Text);
+					tabPage = new TabPage(fileName);
+					RichTextBox textBox = new RichTextBox();
+					textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
+					textBox.SelectionFont = font;
+					//	textBox.SelectionColor = System.Drawing.Color.Black;
+					textBox.Dock = DockStyle.Fill;
+					textBox.ForeColor = textColor;
+					textBox.BackColor = canvasColor;
+					tabPage.Controls.Add(textBox);
+					tabPage.Name = fileName;
+					tabPage.Focus();
+					TabControl.TabPages.Add(tabPage);
+					TabControl.SelectTab(tabPage);
+				}
 			}
 			else
 			{
-				MessageBox.Show("Please open tabs first to close.");
+				try
+				{
+					GetActiveEditor().SaveFile(tabName, RichTextBoxStreamType.PlainText);
+					MessageBox.Show("Saved Successfully");
+				}
+				catch (Exception ex)
+				{
+
+					Console.WriteLine("Exception Message: " + ex.Message);
+
+					MessageBox.Show("Exception:" + ex.Message);
+
+				}
+
+			}
+
+
+
+
+
+
+
+
+
+
+		}
+
+
+		private void SaveAsFile()
+		{
+
+			//			string name = GetActiveEditor().Name;
+			//string tabName = TabControl.SelectedTab.Name;
+			//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
+			//	MessageBox.Show(TabControl.SelectedTab.Name);
+
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				InitialDirectory = @"D:\",
+				Title = "Save text Files",
+				CheckFileExists = false,
+				CheckPathExists = false,
+				DefaultExt = "txt",
+				RestoreDirectory = true,
+				Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+				FilterIndex = 1,
+				AddExtension = true
+			};
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				string fileName = saveFileDialog.FileName;
+				GetActiveEditor().SaveFile(fileName, RichTextBoxStreamType.PlainText);
+
+				RemoveCurrentDocument();
+				//sw.Write(GetActiveEditor().Text);
+				tabPage = new TabPage(fileName);
+				RichTextBox textBox = new RichTextBox();
+				textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
+				textBox.SelectionFont = font;
+				//	textBox.SelectionColor = System.Drawing.Color.Black;
+				textBox.Dock = DockStyle.Fill;
+				textBox.ForeColor = textColor;
+				textBox.BackColor = canvasColor;
+				tabPage.Controls.Add(textBox);
+				tabPage.Name = fileName;
+				tabPage.Focus();
+				TabControl.TabPages.Add(tabPage);
+				TabControl.SelectTab(tabPage);
+			}
+		}
+
+
+
+
+		/// <summary>
+		/// To Open File 
+		/// </summary>
+		private void OpenFile()
+		{
+			OpenFileDialog openFD = new OpenFileDialog
+			{
+				InitialDirectory = "D:",
+				Title = "Open a Text File",
+				FileName = "",
+				Filter = "Text Files|*.txt|Word Documents|*.doc"
+			};
+			if (openFD.ShowDialog() != DialogResult.Cancel)
+			{
+				string Chosen_File = openFD.FileName;
+
+				MessageBox.Show(Chosen_File);
+				tabPage = new TabPage(Chosen_File);
+				RichTextBox textBox = new RichTextBox();
+				textBox.LoadFile(Chosen_File, RichTextBoxStreamType.PlainText);
+				textBox.SelectionFont = font;
+				//	textBox.SelectionColor = System.Drawing.Color.Black;
+				textBox.Dock = DockStyle.Fill;
+				textBox.ForeColor = textColor;
+				textBox.BackColor = canvasColor;
+
+				tabPage.Controls.Add(textBox);
+				tabPage.Name = Chosen_File;
+				tabPage.Focus();
+				TabControl.TabPages.Add(tabPage);
+				TabControl.SelectTab(tabPage);
+			}
+		}
+
+
+
+
+		/// <summary>
+		/// Removes 
+		/// </summary>
+		private void RemoveCurrentDocument()
+		{
+			if (TabControl.SelectedTab != null)
+			{
+				var selectedOption = MessageBox.Show("Do you want to Save your Document?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+				if (selectedOption == DialogResult.Yes)
+
+				{
+					SaveFile();
+					TabControl.TabPages.Remove(TabControl.SelectedTab);
+
+				}
+
+				else if (selectedOption == DialogResult.No)
+
+				{
+					TabControl.TabPages.Remove(TabControl.SelectedTab);
+				}
+
+				else
+
+				{
+
+					//					MessageBox.Show("Cancellled", "Cancel Dialog", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				}
+
+
+
+
+
+
+			}
+			else
+			{
+				tabPage = new TabPage("Welcome To CPaint")
+				{
+
+					//	RichTextBox textBox = new RichTextBox();
+					//textBox.Font = new Font("Arial", 24, FontStyle.Bold);
+					////	textBox.SelectionColor = System.Drawing.Color.Black;
+					//textBox.Dock = DockStyle.Fill;
+					//textBox.ForeColor = Color.AntiqueWhite;
+					//textBox.BackColor = canvasColor;
+
+					//textBox.Text = "Hello! "+ " Welcome to CPaint." ;
+					//	tabPage.Controls.Add(textBox);
+					BackgroundImage = Image.FromFile("D:\\.net\\CPaint\\icons\\cpaintWelcome.jpg"),
+					//	BackColor = ColorTranslator.FromHtml("#808080"),
+					BackColor = (Color.BlanchedAlmond),
+					BackgroundImageLayout = ImageLayout.Center
+				};
+				tabPage.Focus();
+				//			TabControl.BackgroundImage = ;
+				TabControl.TabPages.Add(tabPage);
+				//	TabControl.SelectTab(tabPage);
+
+				//MessageBox.Show("Please open tabs first. to close.");
 			}
 		}
 
@@ -94,9 +326,9 @@ namespace CPaint
 				BackgroundImageLayout = ImageLayout.Center
 			};
 			tabPage.Focus();
-//			TabControl.BackgroundImage = ;
+			//			TabControl.BackgroundImage = ;
 			TabControl.TabPages.Add(tabPage);
-		//	TabControl.SelectTab(tabPage);
+			//	TabControl.SelectTab(tabPage);
 
 		}
 
@@ -140,8 +372,8 @@ namespace CPaint
 
 				Console.WriteLine("Exception Message: " + ex.Message);
 			}
-			
-			
+
+
 		}
 
 		private void BtnPaste_Click(object sender, EventArgs e)
@@ -163,7 +395,7 @@ namespace CPaint
 			try
 			{
 
-			GetActiveEditor().SelectAll();
+				GetActiveEditor().SelectAll();
 			}
 			catch (Exception ex)
 			{
@@ -191,7 +423,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Redo(); 
+				GetActiveEditor().Redo();
 
 			}
 			catch (Exception ex)
@@ -205,7 +437,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Undo();
+				GetActiveEditor().Undo();
 
 			}
 			catch (Exception ex)
@@ -219,7 +451,7 @@ namespace CPaint
 		{
 			try
 			{
-			CreateNewDocument();
+				CreateNewDocument();
 
 			}
 			catch (Exception ex)
@@ -229,47 +461,6 @@ namespace CPaint
 			}
 		}
 
-		private void SaveFile()
-		{
-			SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-			saveFileDialog1.InitialDirectory = "D:";
-			saveFileDialog1.RestoreDirectory = true;
-			saveFileDialog1.Title = "Save File";
-			//	saveFileDialog1.CheckFileExists = true;
-			//	saveFileDialog1.CheckPathExists = true;
-			saveFileDialog1.DefaultExt = "txt";
-			saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-		//	saveFileDialog1.FilterIndex = 1;
-			saveFileDialog1.RestoreDirectory = true;
-			if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-			{
-				using (Stream s = File.Open(saveFileDialog1.FileName, FileMode.CreateNew))
-
-				using (StreamWriter sw=new StreamWriter(s))
-				{
-					//sw.Write(GetActiveEditor().Text);
-					var fileName = saveFileDialog1.FileName;
-					tabPage = new TabPage(fileName);
-					RichTextBox textBox = new RichTextBox();
-					textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
-					textBox.SelectionFont = font;
-					//	textBox.SelectionColor = System.Drawing.Color.Black;
-					textBox.Dock = DockStyle.Fill;
-					textBox.ForeColor = textColor;
-					textBox.BackColor = canvasColor;
-					tabPage.Controls.Add(textBox);
-					tabPage.Focus();
-					TabControl.TabPages.Add(tabPage);
-					TabControl.SelectTab(tabPage);
-					RemoveCurrentDocument();
-				}
-
-
-
-
-
-			}
-		}
 
 		private void ToolStripButton2_Click(object sender, EventArgs e)
 		{
@@ -289,7 +480,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().SelectAll();
+				GetActiveEditor().SelectAll();
 
 			}
 			catch (Exception ex)
@@ -303,7 +494,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Copy();
+				GetActiveEditor().Copy();
 
 			}
 			catch (Exception ex)
@@ -317,7 +508,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Cut();
+				GetActiveEditor().Cut();
 
 			}
 			catch (Exception ex)
@@ -331,7 +522,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Paste();
+				GetActiveEditor().Paste();
 
 			}
 			catch (Exception ex)
@@ -346,7 +537,7 @@ namespace CPaint
 			try
 			{
 
-			GetActiveEditor().Undo();
+				GetActiveEditor().Undo();
 			}
 			catch (Exception ex)
 			{
@@ -359,7 +550,7 @@ namespace CPaint
 		{
 			try
 			{
-			GetActiveEditor().Redo();
+				GetActiveEditor().Redo();
 
 			}
 			catch (Exception ex)
@@ -373,7 +564,7 @@ namespace CPaint
 		{
 			try
 			{
-			RemoveCurrentDocument();
+				RemoveCurrentDocument();
 
 			}
 			catch (Exception ex)
@@ -390,7 +581,7 @@ namespace CPaint
 
 			try
 			{
-			RemoveCurrentDocument();
+				RemoveCurrentDocument();
 
 			}
 			catch (Exception ex)
@@ -405,7 +596,7 @@ namespace CPaint
 		{
 			try
 			{
-			TabControl.TabPages.Clear();
+				TabControl.TabPages.Clear();
 
 			}
 			catch (Exception ex)
@@ -419,7 +610,7 @@ namespace CPaint
 		{
 			try
 			{
-			TabControl.TabPages.Clear();
+				TabControl.TabPages.Clear();
 
 			}
 			catch (Exception ex)
@@ -445,9 +636,9 @@ namespace CPaint
 		{
 			try
 			{
-				
-				
-					 float zoom = GetActiveEditor().ZoomFactor;
+
+
+				float zoom = GetActiveEditor().ZoomFactor;
 				if (zoom + 1 < 10)
 					GetActiveEditor().ZoomFactor = zoom + 1;
 
@@ -503,7 +694,7 @@ namespace CPaint
 
 				float zoom = GetActiveEditor().ZoomFactor;
 				if (zoom - 1 > 0)
-				GetActiveEditor().ZoomFactor = zoom - 1;
+					GetActiveEditor().ZoomFactor = zoom - 1;
 
 			}
 			catch (Exception ex)
@@ -519,7 +710,8 @@ namespace CPaint
 			{
 				ShowColor = true
 			};
-			if (f.ShowDialog()== DialogResult.OK){
+			if (f.ShowDialog() == DialogResult.OK)
+			{
 				GetActiveEditor().SelectAll();
 				GetActiveEditor().SelectionFont = f.Font;
 				GetActiveEditor().SelectionColor = f.Color;
@@ -553,41 +745,26 @@ namespace CPaint
 
 				Console.WriteLine("Exception Message: " + ex.Message);
 			}
-			
+
 
 		}
 
 		private void BtnSave_Click(object sender, EventArgs e)
 		{
-			
-		}
+			try
+			{
 
-		private void OpenFile()
-		{
-			OpenFileDialog openFD = new OpenFileDialog
+
+				SaveFile();
+
+			}
+			catch (Exception ex)
 			{
-				InitialDirectory = "D:",
-				Title = "Open a Text File",
-				FileName = "",
-				Filter = "Text Files|*.txt|Word Documents|*.doc"
-			};
-			if (openFD.ShowDialog() != DialogResult.Cancel)
-			{
-				string Chosen_File = openFD.FileName;
-				tabPage = new TabPage(Chosen_File);
-				RichTextBox textBox = new RichTextBox();
-				textBox.LoadFile(Chosen_File, RichTextBoxStreamType.PlainText);
-				textBox.SelectionFont = font;
-				//	textBox.SelectionColor = System.Drawing.Color.Black;
-				textBox.Dock = DockStyle.Fill;
-				textBox.ForeColor = textColor;
-				textBox.BackColor = canvasColor;
-				tabPage.Controls.Add(textBox);
-				tabPage.Focus();
-				TabControl.TabPages.Add(tabPage);
-				TabControl.SelectTab(tabPage);
+				MessageBox.Show("Cannot Save Document." + ex.Message);
+				Console.WriteLine("Exception Message: " + ex.Message);
 			}
 		}
+
 
 
 		private void BtnOpen_Click(object sender, EventArgs e)
@@ -620,6 +797,21 @@ namespace CPaint
 
 				Console.WriteLine("Exception Message: " + ex.Message);
 			}
+		}
+
+		private void BtnSaveAs_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				SaveAsFile();
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine("Exception Message: " + ex.Message);
+			}
+
+			
 		}
 	}
 }

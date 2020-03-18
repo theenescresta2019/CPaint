@@ -64,6 +64,7 @@
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.ToolBtnAddNew = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnSave = new System.Windows.Forms.ToolStripButton();
+			this.ToolBtnOpen = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnClose = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnCloseAll = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnSelectAll = new System.Windows.Forms.ToolStripButton();
@@ -83,7 +84,6 @@
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolBtnSetFont = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnBgColor = new System.Windows.Forms.ToolStripButton();
-			this.ToolBtnOpen = new System.Windows.Forms.ToolStripButton();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -157,6 +157,7 @@
             | System.Windows.Forms.Keys.S)));
 			this.BtnSaveAs.Size = new System.Drawing.Size(243, 22);
 			this.BtnSaveAs.Text = "Save As";
+			this.BtnSaveAs.Click += new System.EventHandler(this.BtnSaveAs_Click);
 			// 
 			// BtnCloseCurrentTab
 			// 
@@ -468,6 +469,17 @@
 			this.ToolBtnSave.ToolTipText = "Save Current Document (Ctrl + S)";
 			this.ToolBtnSave.Click += new System.EventHandler(this.ToolStripButton2_Click);
 			// 
+			// ToolBtnOpen
+			// 
+			this.ToolBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToolBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnOpen.Image")));
+			this.ToolBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToolBtnOpen.Name = "ToolBtnOpen";
+			this.ToolBtnOpen.Size = new System.Drawing.Size(23, 22);
+			this.ToolBtnOpen.Text = "Open File";
+			this.ToolBtnOpen.ToolTipText = "Open File (Ctrl + O)";
+			this.ToolBtnOpen.Click += new System.EventHandler(this.ToolBtnOpen_Click);
+			// 
 			// ToolBtnClose
 			// 
 			this.ToolBtnClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -641,17 +653,6 @@
 			this.ToolBtnBgColor.Text = "Background Color";
 			this.ToolBtnBgColor.ToolTipText = "Change Background Color";
 			this.ToolBtnBgColor.Click += new System.EventHandler(this.ToolStripButton1_Click_4);
-			// 
-			// ToolBtnOpen
-			// 
-			this.ToolBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToolBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnOpen.Image")));
-			this.ToolBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolBtnOpen.Name = "ToolBtnOpen";
-			this.ToolBtnOpen.Size = new System.Drawing.Size(23, 22);
-			this.ToolBtnOpen.Text = "Open File";
-			this.ToolBtnOpen.ToolTipText = "Open File (Ctrl + O)";
-			this.ToolBtnOpen.Click += new System.EventHandler(this.ToolBtnOpen_Click);
 			// 
 			// MainForm
 			// 
