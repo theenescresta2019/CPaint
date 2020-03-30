@@ -66,7 +66,6 @@
 			this.ToolBtnSave = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnOpen = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnClose = new System.Windows.Forms.ToolStripButton();
-			this.ToolBtnCloseAll = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnSelectAll = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolBtnCopy = new System.Windows.Forms.ToolStripButton();
@@ -84,13 +83,15 @@
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolBtnSetFont = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnBgColor = new System.Windows.Forms.ToolStripButton();
+			this.richLine = new System.Windows.Forms.RichTextBox();
+			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this.menuStrip1.BackColor = System.Drawing.Color.DimGray;
+			this.menuStrip1.BackColor = System.Drawing.SystemColors.HotTrack;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BtnFileMenu,
             this.toolStripMenuItem1,
@@ -409,21 +410,23 @@
 			// 
 			this.TabControl.AllowDrop = true;
 			this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TabControl.Location = new System.Drawing.Point(0, 51);
+			this.TabControl.Location = new System.Drawing.Point(33, 51);
 			this.TabControl.Name = "TabControl";
 			this.TabControl.SelectedIndex = 0;
-			this.TabControl.Size = new System.Drawing.Size(723, 380);
+			this.TabControl.Size = new System.Drawing.Size(690, 380);
 			this.TabControl.TabIndex = 1;
 			this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
+			this.TabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Selecting);
+			this.TabControl.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Deselecting);
 			// 
 			// toolStrip1
 			// 
+			this.toolStrip1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolBtnAddNew,
             this.ToolBtnSave,
             this.ToolBtnOpen,
             this.ToolBtnClose,
-            this.ToolBtnCloseAll,
             this.ToolBtnSelectAll,
             this.toolStripSeparator1,
             this.ToolBtnCopy,
@@ -490,17 +493,6 @@
 			this.ToolBtnClose.Text = "ToolBtnClose";
 			this.ToolBtnClose.ToolTipText = "Close Current Document (Ctrl + W)";
 			this.ToolBtnClose.Click += new System.EventHandler(this.ToolBtnClose_Click);
-			// 
-			// ToolBtnCloseAll
-			// 
-			this.ToolBtnCloseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToolBtnCloseAll.Image = ((System.Drawing.Image)(resources.GetObject("ToolBtnCloseAll.Image")));
-			this.ToolBtnCloseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolBtnCloseAll.Name = "ToolBtnCloseAll";
-			this.ToolBtnCloseAll.Size = new System.Drawing.Size(23, 22);
-			this.ToolBtnCloseAll.Text = "ToolBtnCloseAll";
-			this.ToolBtnCloseAll.ToolTipText = "Close All Tabs (Ctrl + Shift + Q )";
-			this.ToolBtnCloseAll.Click += new System.EventHandler(this.ToolStripButton1_Click_1);
 			// 
 			// ToolBtnSelectAll
 			// 
@@ -619,6 +611,7 @@
 			this.ToolBtnDebug.Size = new System.Drawing.Size(23, 22);
 			this.ToolBtnDebug.Text = "ToolBtnDebug";
 			this.ToolBtnDebug.ToolTipText = "Debug (Ctrl + D)";
+			this.ToolBtnDebug.Click += new System.EventHandler(this.ToolBtnDebug_Click);
 			// 
 			// ToolBtnRun
 			// 
@@ -654,13 +647,43 @@
 			this.ToolBtnBgColor.ToolTipText = "Change Background Color";
 			this.ToolBtnBgColor.Click += new System.EventHandler(this.ToolStripButton1_Click_4);
 			// 
+			// richLine
+			// 
+			this.richLine.BackColor = System.Drawing.Color.DarkSlateBlue;
+			this.richLine.Dock = System.Windows.Forms.DockStyle.Left;
+			this.richLine.ForeColor = System.Drawing.SystemColors.Window;
+			this.richLine.Location = new System.Drawing.Point(0, 51);
+			this.richLine.Name = "richLine";
+			this.richLine.ReadOnly = true;
+			this.richLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+			this.richLine.Size = new System.Drawing.Size(33, 380);
+			this.richLine.TabIndex = 3;
+			this.richLine.Text = "";
+			this.richLine.TextChanged += new System.EventHandler(this.richLine_TextChanged);
+			// 
+			// richTextBox1
+			// 
+			this.richTextBox1.BackColor = System.Drawing.Color.Black;
+			this.richTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.richTextBox1.ForeColor = System.Drawing.SystemColors.Window;
+			this.richTextBox1.Location = new System.Drawing.Point(33, 293);
+			this.richTextBox1.Name = "richTextBox1";
+			this.richTextBox1.ReadOnly = true;
+			this.richTextBox1.Size = new System.Drawing.Size(690, 138);
+			this.richTextBox1.TabIndex = 4;
+			this.richTextBox1.Text = "";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.ClientSize = new System.Drawing.Size(723, 431);
+			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.TabControl);
+			this.Controls.Add(this.richLine);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.menuStrip1);
 			this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -706,7 +729,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripButton ToolBtnRun;
 		private System.Windows.Forms.ToolStripMenuItem BtnCloseAllTabs;
-		private System.Windows.Forms.ToolStripButton ToolBtnCloseAll;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem BtnCopy;
 		private System.Windows.Forms.ToolStripMenuItem BtnCut;
@@ -736,6 +758,8 @@
 		private System.Windows.Forms.ToolStripButton ToolBtnDebug;
 		private System.Windows.Forms.ToolStripButton ToolBtnBgColor;
 		private System.Windows.Forms.ToolStripButton ToolBtnOpen;
+		private System.Windows.Forms.RichTextBox richLine;
+		private System.Windows.Forms.RichTextBox richTextBox1;
 	}
 }
 
