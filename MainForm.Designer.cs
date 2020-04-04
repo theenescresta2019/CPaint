@@ -84,7 +84,7 @@
 			this.ToolBtnSetFont = new System.Windows.Forms.ToolStripButton();
 			this.ToolBtnBgColor = new System.Windows.Forms.ToolStripButton();
 			this.richLine = new System.Windows.Forms.RichTextBox();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.consoleBox = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -622,6 +622,7 @@
 			this.ToolBtnRun.Size = new System.Drawing.Size(23, 22);
 			this.ToolBtnRun.Text = "ToolBtnRun";
 			this.ToolBtnRun.ToolTipText = "Run/Execute (Ctrl + R)";
+			this.ToolBtnRun.Click += new System.EventHandler(this.ToolBtnRun_Click);
 			// 
 			// toolStripSeparator5
 			// 
@@ -661,19 +662,19 @@
 			this.richLine.Text = "";
 			this.richLine.TextChanged += new System.EventHandler(this.richLine_TextChanged);
 			// 
-			// richTextBox1
+			// consoleBox
 			// 
-			this.richTextBox1.BackColor = System.Drawing.Color.Black;
-			this.richTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.richTextBox1.ForeColor = System.Drawing.SystemColors.Window;
-			this.richTextBox1.Location = new System.Drawing.Point(33, 293);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.ReadOnly = true;
-			this.richTextBox1.Size = new System.Drawing.Size(690, 138);
-			this.richTextBox1.TabIndex = 4;
-			this.richTextBox1.Text = "";
+			this.consoleBox.BackColor = System.Drawing.Color.Black;
+			this.consoleBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.consoleBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.consoleBox.Font = new System.Drawing.Font("Garamond", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.consoleBox.ForeColor = System.Drawing.SystemColors.Window;
+			this.consoleBox.Location = new System.Drawing.Point(33, 231);
+			this.consoleBox.Name = "consoleBox";
+			this.consoleBox.Size = new System.Drawing.Size(690, 200);
+			this.consoleBox.TabIndex = 4;
+			this.consoleBox.Text = "";
+			this.consoleBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.consoleBox_KeyDown);
 			// 
 			// MainForm
 			// 
@@ -681,7 +682,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.ClientSize = new System.Drawing.Size(723, 431);
-			this.Controls.Add(this.richTextBox1);
+			this.Controls.Add(this.consoleBox);
 			this.Controls.Add(this.TabControl);
 			this.Controls.Add(this.richLine);
 			this.Controls.Add(this.toolStrip1);
@@ -759,7 +760,7 @@
 		private System.Windows.Forms.ToolStripButton ToolBtnBgColor;
 		private System.Windows.Forms.ToolStripButton ToolBtnOpen;
 		private System.Windows.Forms.RichTextBox richLine;
-		private System.Windows.Forms.RichTextBox richTextBox1;
+		private System.Windows.Forms.RichTextBox consoleBox;
 	}
 }
 

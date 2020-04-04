@@ -1,4 +1,5 @@
 ﻿using System;
+using CPaint.Compilers;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace CPaint
 {
 	public partial class MainForm : Form
 	{
+		Output outputWindow = new Output();
+		Compiler compiler;
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -17,7 +21,7 @@ namespace CPaint
 		Color canvasColor = Color.DarkSlateBlue;
 		Color textColor = Color.White;
 		bool isSaved = false;
-	//	bool isNewSave = false;
+		//	bool isNewSave = false;
 
 		Font font = new Font("Arial", 16, FontStyle.Bold);
 		/// <summary>
@@ -34,6 +38,8 @@ namespace CPaint
 			}
 
 			return rtb;
+
+
 		}
 
 		public void AddLineNumbers()
@@ -94,10 +100,10 @@ namespace CPaint
 				Dock = DockStyle.Fill,
 				ForeColor = textColor,
 				BackColor = canvasColor,
-				Cursor=Cursors.Default,
-				
+				Cursor = Cursors.Default,
+
 			};
-		//	statusStrip1.Text = "tesaldskfjladf";
+			//	statusStrip1.Text = "tesaldskfjladf";
 			tabPage.Controls.Add(textBox);
 			tabPage.Name = "New";
 
@@ -106,7 +112,7 @@ namespace CPaint
 
 			tabPage.Focus();
 			TabControl.KeyPress += new KeyPressEventHandler(TabPage_KeyPress);
-		//	tabPage.KeyPress += AddLineNumbers();
+			//	tabPage.KeyPress += AddLineNumbers();
 			TabControl.TabPages.Add(tabPage);
 			TabControl.SelectTab(tabPage);
 
@@ -120,75 +126,70 @@ namespace CPaint
 
 			if (GetActiveEditor().TextLength == 0)
 			{
-				MessageBox.Show("Please Write some text first. Empty file cannot be saved.","Warning");
+				MessageBox.Show("Please Write some text first. Empty file cannot be saved.", "Warning");
 
 			}
 			else
 			{
+				//			string name = GetActiveEditor().Name;
+				//string tabName = TabControl.SelectedTab.Name;
+				//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
+				//	MessageBox.Show(TabControl.SelectedTab.Name);
 
-		
-
-
-
-			//			string name = GetActiveEditor().Name;
-			//string tabName = TabControl.SelectedTab.Name;
-			//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
-			//	MessageBox.Show(TabControl.SelectedTab.Name);
-		
-			string tabName = TabControl.SelectedTab.Name;
-			if (tabName == "New")
-			{
-				SaveFileDialog saveFileDialog = new SaveFileDialog
+				string tabName = TabControl.SelectedTab.Name;
+				if (tabName == "New")
 				{
-					InitialDirectory = @"D:\",
-					Title = "Save text Files",
-					CheckFileExists = false,
-					CheckPathExists = false,
-					DefaultExt = "txt",
-					RestoreDirectory = true,
-					Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
-					FilterIndex = 1,
-					AddExtension = true
-				};
-				if (saveFileDialog.ShowDialog() == DialogResult.OK)
-				{
-					string fileName = saveFileDialog.FileName;
-					GetActiveEditor().SaveFile(fileName, RichTextBoxStreamType.PlainText);
-					isSaved = true;
-					RemoveCurrentDocument();
-					//sw.Write(GetActiveEditor().Text);
-					tabPage = new TabPage(fileName);
-					RichTextBox textBox = new RichTextBox();
-					textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
-					textBox.SelectionFont = font;
-					//	textBox.SelectionColor = System.Drawing.Color.Black;
-					textBox.Dock = DockStyle.Fill;
-					textBox.ForeColor = textColor;
-					textBox.BackColor = canvasColor;
-					tabPage.Controls.Add(textBox);
-					tabPage.Name = fileName;
-					tabPage.Focus();
-					TabControl.TabPages.Add(tabPage);
-					TabControl.SelectTab(tabPage);
+					SaveFileDialog saveFileDialog = new SaveFileDialog
+					{
+						InitialDirectory = @"D:\",
+						Title = "Save text Files",
+						CheckFileExists = false,
+						CheckPathExists = false,
+						DefaultExt = "txt",
+						RestoreDirectory = true,
+						Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+						FilterIndex = 1,
+						AddExtension = true
+					};
+					if (saveFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						string fileName = saveFileDialog.FileName;
+						GetActiveEditor().SaveFile(fileName, RichTextBoxStreamType.PlainText);
+						isSaved = true;
+						RemoveCurrentDocument();
+						//sw.Write(GetActiveEditor().Text);
+						tabPage = new TabPage(fileName);
+						RichTextBox textBox = new RichTextBox();
+						textBox.LoadFile(fileName, RichTextBoxStreamType.PlainText);
+						textBox.SelectionFont = font;
+						//	textBox.SelectionColor = System.Drawing.Color.Black;
+						textBox.Dock = DockStyle.Fill;
+						textBox.ForeColor = textColor;
+						textBox.BackColor = canvasColor;
+						tabPage.Controls.Add(textBox);
+						tabPage.Name = fileName;
+						tabPage.Focus();
+						TabControl.TabPages.Add(tabPage);
+						TabControl.SelectTab(tabPage);
+					}
 				}
-			}
-			else
-			{
-				try
+				else
 				{
-					GetActiveEditor().SaveFile(tabName, RichTextBoxStreamType.PlainText);
-					MessageBox.Show("Saved Successfully");
-				}
-				catch (Exception ex)
-				{
+					try
+					{
+						GetActiveEditor().SaveFile(tabName, RichTextBoxStreamType.PlainText);
+						//	MessageBox.Show("Saved Successfully");
+					}
+					catch (Exception ex)
+					{
 
-					Console.WriteLine("Exception Message: " + ex.Message);
+						Console.WriteLine("Exception Message: " + ex.Message);
 
-					MessageBox.Show("Exception:" + ex.Message);
+						MessageBox.Show("Exception:" + ex.Message);
+
+					}
 
 				}
-
-			}
 			}
 
 		}
@@ -299,8 +300,6 @@ namespace CPaint
 			}
 			else
 			{
-
-
 				if (isSaved == true)
 				{
 					TabControl.TabPages.Remove(TabControl.SelectedTab);
@@ -380,27 +379,29 @@ namespace CPaint
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			tabPage = new TabPage("Welcome To CPaint")
-			{
+			CreateNewDocument();
 
-				//	RichTextBox textBox = new RichTextBox();
-				//textBox.Font = new Font("Arial", 24, FontStyle.Bold);
-				////	textBox.SelectionColor = System.Drawing.Color.Black;
-				//textBox.Dock = DockStyle.Fill;
-				//textBox.ForeColor = Color.AntiqueWhite;
-				//textBox.BackColor = canvasColor;
+			//tabPage = new TabPage("Welcome To CPaint")
+			//{
 
-				//textBox.Text = "Hello! "+ " Welcome to CPaint." ;
-				//	tabPage.Controls.Add(textBox);
-				BackgroundImage = Image.FromFile("D:\\.net\\CPaint\\icons\\cpaintWelcome.jpg"),
-				//	BackColor = ColorTranslator.FromHtml("#808080"),
-				BackColor = (Color.BlanchedAlmond),
-				BackgroundImageLayout = ImageLayout.Center
-			};
-			tabPage.Focus();
-			//			TabControl.BackgroundImage = ;
-			TabControl.TabPages.Add(tabPage);
-			//	TabControl.SelectTab(tabPage);
+			//	//	RichTextBox textBox = new RichTextBox();
+			//	//textBox.Font = new Font("Arial", 24, FontStyle.Bold);
+			//	////	textBox.SelectionColor = System.Drawing.Color.Black;
+			//	//textBox.Dock = DockStyle.Fill;
+			//	//textBox.ForeColor = Color.AntiqueWhite;
+			//	//textBox.BackColor = canvasColor;
+
+			//	//textBox.Text = "Hello! "+ " Welcome to CPaint." ;
+			//	//	tabPage.Controls.Add(textBox);
+			//	BackgroundImage = Image.FromFile("D:\\.net\\CPaint\\icons\\cpaintWelcome.jpg"),
+			//	//	BackColor = ColorTranslator.FromHtml("#808080"),
+			//	BackColor = (Color.BlanchedAlmond),
+			//	BackgroundImageLayout = ImageLayout.Center
+			//};
+			//tabPage.Focus();
+			////			TabControl.BackgroundImage = ;
+			//TabControl.TabPages.Add(tabPage);
+			////	TabControl.SelectTab(tabPage);
 
 		}
 
@@ -891,12 +892,51 @@ namespace CPaint
 
 		}
 
+
+		private void execute()
+		{
+			Output outputWindow = new Output();
+			compiler = new Compiler(outputWindow);
+			//get all text and save in lines string array
+			string output = "";
+			string[] lines = GetActiveEditor().Lines;
+			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+			if (lines == null || lines.Length == 0)
+			{
+				consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
+			}
+			else
+			{
+				foreach (var line in lines)
+				{
+					//					string[] liner = (line.Trim()).Split();
+					//				consoleBox.Text += liner;
+					//string[] code = line.Split(' ', ',', '(', ')');
+					output = compiler.Compile(line);
+					consoleBox.Text += "\n" + output;
+				}
+
+			}
+
+
+		}
+
+
+
+
 		private void ToolBtnDebug_Click(object sender, EventArgs e)
 		{
-			string allText = GetActiveEditor().Text;
-
-		string[] lines=	Regex.Split(allText, Environment.NewLine);
-			Console.WriteLine(String.Join(",", lines));
+			consoleBox.Clear();
+			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
+			execute();
+			//try
+			//{
+			//}
+			//catch (Exception ex)
+			//{
+			//consoleBox.Text += "Unable to Proceed due to Error in this window. Please try in another window";
+			//	Console.WriteLine("Exception Message: " + ex.Message);
+			//}
 		}
 
 		private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
@@ -934,6 +974,156 @@ namespace CPaint
 		private void richLine_TextChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void ToolBtnRun_Click(object sender, EventArgs e)
+		{
+			Output output = new Output();
+			output.Show();
+		}
+
+		private void consoleBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				try
+				{
+					int cursorPosition = consoleBox.SelectionStart;
+					int lineIndex = consoleBox.GetLineFromCharIndex(cursorPosition);
+					string lineText = consoleBox.Lines[lineIndex];
+					string[] code = lineText.Split(' ', ',', '(', ')');
+					code = code.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+					if (code[0].ToLower() == "clear")
+					{
+						try
+						{
+							if (outputWindow.IsDisposed)
+							{
+								outputWindow = new Output();
+							}
+
+
+							compiler = new Compiler(outputWindow);
+							compiler.ClearOutput();
+
+							//GetActiveEditor().Text = "";
+							//consoleBox.Text += "\n Clear command executed Successfully. \n";
+							consoleBox.Text = "";
+						}
+						catch (Exception ex)
+						{
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+					}
+					else if (code[0].ToLower() == "run")
+					{
+						try
+						{
+							execute();
+							consoleBox.Text += "\n Run command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+
+					}
+					else if (code[0].ToLower() == "reset")
+					{
+
+						try
+						{
+							if (outputWindow.IsDisposed)
+							{
+								outputWindow = new Output();
+							}
+
+							compiler = new Compiler(outputWindow);
+							compiler.ResetOutput();
+
+							consoleBox.Text += "\n Reset command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+
+
+					}
+					else if (code[0].ToLower() == "save")
+					{
+						try
+						{
+							SaveFile();
+							consoleBox.Text += "\n Save command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+
+					}
+					else if (code[0].ToLower() == "saveas")
+					{
+						try
+						{
+							SaveAsFile();
+							consoleBox.Text += "\n SaveAs command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+					}
+					else if (code[0].ToLower() == "close")
+					{
+						try
+						{
+							RemoveCurrentDocument();
+							consoleBox.Text += "\n Close command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+
+					}
+					else if (code[0].ToLower() == "open")
+					{
+						try
+						{
+							OpenFile();
+							consoleBox.Text += "\n Open command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += " \n Command Execution Failed. \n";
+						}
+					}
+
+				}
+				catch (Exception ex)
+				{
+
+					Console.WriteLine("Exception Message: " + ex.Message);
+
+				}
+
+
+			}
 		}
 	}
 }
