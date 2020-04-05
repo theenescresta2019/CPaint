@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CPaint.Class
 {
-	class Functions
+	abstract class AbstractFactory:IFactoryShape
 	{
+		public abstract FactoryShape GetShape(string shapeType);
 	}
 }

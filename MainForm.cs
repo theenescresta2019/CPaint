@@ -909,11 +909,15 @@ namespace CPaint
 			{
 				foreach (var line in lines)
 				{
-					//					string[] liner = (line.Trim()).Split();
-					//				consoleBox.Text += liner;
+					//string[] liner = (line.Trim()).Split();
+					//consoleBox.Text += liner;
 					//string[] code = line.Split(' ', ',', '(', ')');
 					output = compiler.Compile(line);
 					consoleBox.Text += "\n" + output;
+					if (output.Contains("Error"))
+					{
+					break;
+					}
 				}
 
 			}
@@ -982,6 +986,12 @@ namespace CPaint
 			output.Show();
 		}
 
+		/// <summary>
+		/// used for Command in console box when enter key is pressed . 
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void consoleBox_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
@@ -1001,8 +1011,6 @@ namespace CPaint
 							{
 								outputWindow = new Output();
 							}
-
-
 							compiler = new Compiler(outputWindow);
 							compiler.ClearOutput();
 

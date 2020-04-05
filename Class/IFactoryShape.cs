@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CPaint.Class
 {
-	class Strings
+
+	interface IFactoryShape
 	{
+		FactoryShape GetShape(string shapeType);
 	}
 }

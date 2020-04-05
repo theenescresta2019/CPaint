@@ -667,7 +667,7 @@
 			this.consoleBox.BackColor = System.Drawing.Color.Black;
 			this.consoleBox.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.consoleBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.consoleBox.Font = new System.Drawing.Font("Garamond", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.consoleBox.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.consoleBox.ForeColor = System.Drawing.SystemColors.Window;
 			this.consoleBox.Location = new System.Drawing.Point(33, 231);
 			this.consoleBox.Name = "consoleBox";
