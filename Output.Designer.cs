@@ -28,36 +28,21 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.outputArea = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.outputArea)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// outputArea
-			// 
-			this.outputArea.BackColor = System.Drawing.Color.White;
-			this.outputArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.outputArea.Location = new System.Drawing.Point(0, 0);
-			this.outputArea.Name = "outputArea";
-			this.outputArea.Size = new System.Drawing.Size(939, 524);
-			this.outputArea.TabIndex = 0;
-			this.outputArea.TabStop = false;
-			this.outputArea.Click += new System.EventHandler(this.outputArea_Click);
 			// 
 			// Output
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(939, 524);
-			this.Controls.Add(this.outputArea);
 			this.Name = "Output";
 			this.Text = "Output";
-			((System.ComponentModel.ISupportInitialize)(this.outputArea)).EndInit();
+			this.Load += new System.EventHandler(this.Output_Load);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		public System.Windows.Forms.PictureBox outputArea;
 	}
 }

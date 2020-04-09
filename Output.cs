@@ -1,26 +1,42 @@
-﻿using System;
+﻿using CPaint.Class;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CPaint
 {
 	public partial class Output : Form
 	{
-		
+		public List<Shape> Shapes { get; set; }
+
 		public Output()
 		{
+			Shapes = new List<Shape>();
 			InitializeComponent();
 		}
 
-		private void outputArea_Click(object sender, EventArgs e)
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			foreach (Shape shapeToDraw in Shapes)
+			{
+				shapeToDraw.Draw(e.Graphics);
+			}
+		}
+
+
+		private void Output_Load(object sender, EventArgs e)
 		{
 
 		}
+
+		private void outputArea_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+		
+
+
+
+
 	}
 }

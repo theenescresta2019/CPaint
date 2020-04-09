@@ -5,18 +5,18 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using CPaint.Class;
 
 namespace CPaint
 {
 	public partial class MainForm : Form
 	{
 		Output outputWindow = new Output();
-		Compiler compiler;
-
 		public MainForm()
 		{
 			InitializeComponent();
 		}
+
 		private TabPage tabPage;
 		Color canvasColor = Color.DarkSlateBlue;
 		Color textColor = Color.White;
@@ -893,14 +893,46 @@ namespace CPaint
 		}
 
 
+		//private void execute()
+		//{
+		//	Output outputWindow = new Output();
+		//	Compiler compiler = new Compiler();
+		//	//compiler = new Compiler(outputWindow);
+		//	//get all text and save in lines string array
+		//	string output = "";
+		//	string[] lines = GetActiveEditor().Lines;
+		//	lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+		//	if (lines == null || lines.Length == 0)
+		//	{
+		//		consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
+		//	}
+		//	else
+		//	{
+		//		foreach (var line in lines)
+		//		{
+		//			output = compiler.Compile(line);
+		//			consoleBox.Text += "\n" + output;
+		//			if (output.Contains("Error"))
+		//			{
+		//			break;
+		//			}
+		//		}
+
+		//	}
+
+
+		//}
+
 		private void execute()
 		{
+
 			Output outputWindow = new Output();
-			compiler = new Compiler(outputWindow);
-			//get all text and save in lines string array
-			string output = "";
+			Compiler compiler = new Compiler();
+			string message = "";
 			string[] lines = GetActiveEditor().Lines;
 			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+			///string[] lines = { "circle(24)", "rectangle(80,56)" };
+
 			if (lines == null || lines.Length == 0)
 			{
 				consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
@@ -909,23 +941,23 @@ namespace CPaint
 			{
 				foreach (var line in lines)
 				{
-					//string[] liner = (line.Trim()).Split();
-					//consoleBox.Text += liner;
-					//string[] code = line.Split(' ', ',', '(', ')');
-					output = compiler.Compile(line);
-					consoleBox.Text += "\n" + output;
-					if (output.Contains("Error"))
+					try
 					{
-					break;
+						Shape compiledShape = compiler.Compile(line);
+						outputWindow.Shapes.Add(compiledShape);
+					}
+					catch(Exception ex)
+					{
+						message = "Error :- Error in Drawing Shapes. " + ex.Message;
+						Console.WriteLine(message);
+						consoleBox.Text += message;
 					}
 				}
-
+				outputWindow.Show();
+				outputWindow.Invalidate();
 			}
 
-
 		}
-
-
 
 
 		private void ToolBtnDebug_Click(object sender, EventArgs e)
@@ -933,14 +965,6 @@ namespace CPaint
 			consoleBox.Clear();
 			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
 			execute();
-			//try
-			//{
-			//}
-			//catch (Exception ex)
-			//{
-			//consoleBox.Text += "Unable to Proceed due to Error in this window. Please try in another window";
-			//	Console.WriteLine("Exception Message: " + ex.Message);
-			//}
 		}
 
 		private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
@@ -994,144 +1018,157 @@ namespace CPaint
 		/// <param name="e"></param>
 		private void consoleBox_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				try
-				{
-					int cursorPosition = consoleBox.SelectionStart;
-					int lineIndex = consoleBox.GetLineFromCharIndex(cursorPosition);
-					string lineText = consoleBox.Lines[lineIndex];
-					string[] code = lineText.Split(' ', ',', '(', ')');
-					code = code.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-					if (code[0].ToLower() == "clear")
-					{
-						try
-						{
-							if (outputWindow.IsDisposed)
-							{
-								outputWindow = new Output();
-							}
-							compiler = new Compiler(outputWindow);
-							compiler.ClearOutput();
+			//	if (e.KeyCode == Keys.Enter)
+			//	{
+			//		try
+			//		{
+			//			int cursorPosition = consoleBox.SelectionStart;
+			//			int lineIndex = consoleBox.GetLineFromCharIndex(cursorPosition);
+			//			string lineText = consoleBox.Lines[lineIndex];
+			//			string[] code = lineText.Split(' ', ',', '(', ')');
+			//			code = code.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+			//			if (code[0].ToLower() == "clear")
+			//			{
+			//				try
+			//				{
+			//					if (outputWindow.IsDisposed)
+			//					{
+			//						outputWindow = new Output();
+			//					}
+			//					compiler = new Compiler(outputWindow);
+			//					compiler.ClearOutput();
 
-							//GetActiveEditor().Text = "";
-							//consoleBox.Text += "\n Clear command executed Successfully. \n";
-							consoleBox.Text = "";
-						}
-						catch (Exception ex)
-						{
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
-					}
-					else if (code[0].ToLower() == "run")
-					{
-						try
-						{
-							execute();
-							consoleBox.Text += "\n Run command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
+			//					//GetActiveEditor().Text = "";
+			//					//consoleBox.Text += "\n Clear command executed Successfully. \n";
+			//					consoleBox.Text = "";
+			//				}
+			//				catch (Exception ex)
+			//				{
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
+			//			}
+			//			else if (code[0].ToLower() == "run")
+			//			{
+			//				try
+			//				{
+			//					execute();
+			//					consoleBox.Text += "\n Run command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
 
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
 
-					}
-					else if (code[0].ToLower() == "reset")
-					{
+			//			}
+			//			else if (code[0].ToLower() == "reset")
+			//			{
 
-						try
-						{
-							if (outputWindow.IsDisposed)
-							{
-								outputWindow = new Output();
-							}
+			//				try
+			//				{
+			//					if (outputWindow.IsDisposed)
+			//					{
+			//						outputWindow = new Output();
+			//					}
 
-							compiler = new Compiler(outputWindow);
-							compiler.ResetOutput();
+			//					compiler = new Compiler(outputWindow);
+			//					compiler.ResetOutput();
 
-							consoleBox.Text += "\n Reset command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
+			//					consoleBox.Text += "\n Reset command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
 
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
-
-
-					}
-					else if (code[0].ToLower() == "save")
-					{
-						try
-						{
-							SaveFile();
-							consoleBox.Text += "\n Save command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
-
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
-
-					}
-					else if (code[0].ToLower() == "saveas")
-					{
-						try
-						{
-							SaveAsFile();
-							consoleBox.Text += "\n SaveAs command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
-
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
-					}
-					else if (code[0].ToLower() == "close")
-					{
-						try
-						{
-							RemoveCurrentDocument();
-							consoleBox.Text += "\n Close command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
-
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += "\n Command Execution Failed. \n";
-						}
-
-					}
-					else if (code[0].ToLower() == "open")
-					{
-						try
-						{
-							OpenFile();
-							consoleBox.Text += "\n Open command executed Successfully. \n";
-						}
-						catch (Exception ex)
-						{
-
-							Console.WriteLine("Exception Message: " + ex.Message);
-							consoleBox.Text += " \n Command Execution Failed. \n";
-						}
-					}
-
-				}
-				catch (Exception ex)
-				{
-
-					Console.WriteLine("Exception Message: " + ex.Message);
-
-				}
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
 
 
-			}
+			//			}
+			//			else if (code[0].ToLower() == "save")
+			//			{
+			//				try
+			//				{
+			//					SaveFile();
+			//					consoleBox.Text += "\n Save command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
+
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
+
+			//			}
+			//			else if (code[0].ToLower() == "saveas")
+			//			{
+			//				try
+			//				{
+			//					SaveAsFile();
+			//					consoleBox.Text += "\n SaveAs command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
+
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
+			//			}
+			//			else if (code[0].ToLower() == "close")
+			//			{
+			//				try
+			//				{
+			//					RemoveCurrentDocument();
+			//					consoleBox.Text += "\n Close command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
+
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += "\n Command Execution Failed. \n";
+			//				}
+
+			//			}
+			//			else if (code[0].ToLower() == "open")
+			//			{
+			//				try
+			//				{
+			//					OpenFile();
+			//					consoleBox.Text += "\n Open command executed Successfully. \n";
+			//				}
+			//				catch (Exception ex)
+			//				{
+
+			//					Console.WriteLine("Exception Message: " + ex.Message);
+			//					consoleBox.Text += " \n Command Execution Failed. \n";
+			//				}
+			//			}
+
+			//		}
+			//		catch (Exception ex)
+			//		{
+
+			//			Console.WriteLine("Exception Message: " + ex.Message);
+
+			//		}
+
+
+			//	}
+		}
+
+		private void pictureBox1_Click(object sender, EventArgs e)
+		{
+
+
+
+
+		}
+
+		private void pictureBox1_Paint(object sender, PaintEventArgs e)
+		{
+
 		}
 	}
 }

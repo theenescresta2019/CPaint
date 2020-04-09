@@ -37,7 +37,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\CPaint.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,18 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\AbstractFactory.cs" />
     <Compile Include="Class\Circle.cs" />
-    <Compile Include="Class\FactoryShape.cs" />
-    <Compile Include="Class\IFactoryShape.cs" />
+    <Compile Include="Class\Line.cs" />
+    <Compile Include="Class\Rectangle.cs" />
+    <Compile Include="Class\Shape.cs" />
     <Compile Include="Class\ShapeFactory.cs" />
+    <Compile Include="Class\Triangle.cs" />
     <Compile Include="Compiler\Compiler.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

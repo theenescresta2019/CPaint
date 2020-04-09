@@ -413,7 +413,7 @@
 			this.TabControl.Location = new System.Drawing.Point(33, 51);
 			this.TabControl.Name = "TabControl";
 			this.TabControl.SelectedIndex = 0;
-			this.TabControl.Size = new System.Drawing.Size(690, 380);
+			this.TabControl.Size = new System.Drawing.Size(690, 180);
 			this.TabControl.TabIndex = 1;
 			this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
 			this.TabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Selecting);
@@ -682,8 +682,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.ClientSize = new System.Drawing.Size(723, 431);
-			this.Controls.Add(this.consoleBox);
 			this.Controls.Add(this.TabControl);
+			this.Controls.Add(this.consoleBox);
 			this.Controls.Add(this.richLine);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.menuStrip1);
@@ -760,7 +760,7 @@
 		private System.Windows.Forms.ToolStripButton ToolBtnBgColor;
 		private System.Windows.Forms.ToolStripButton ToolBtnOpen;
 		private System.Windows.Forms.RichTextBox richLine;
-		private System.Windows.Forms.RichTextBox consoleBox;
+		public System.Windows.Forms.RichTextBox consoleBox;
 	}
 }
 

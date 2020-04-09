@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CPaint.Class
 {
-	class ShapeFactory:AbstractFactory
+	public class ShapeFactory
 	{
-		public override FactoryShape GetShape(string shapeType)
+		public static Shape CreateShape(string shapeName, float initX, float initY, float radius, float height, float width, float side1, float side2, float side3)
 		{
-			FactoryShape factoryShape = null;
-			if (shapeType.Equals("circle"))
+			switch (shapeName)
 			{
-				factoryShape = new FactoryShape(new Circle());
+				case "circle":
+					return new Circle() {initX=initX, initY=initY,Radius=radius };
+				case "rectangle":
+					return new Rectangle() { initX = initX, initY = initY, Width = width, Height = height};
+				default:
+					throw new NotSupportedException("shapeName");
 			}
-
-			return factoryShape;
 		}
 	}
 }
