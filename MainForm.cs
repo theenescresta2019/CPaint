@@ -9,9 +9,18 @@ using CPaint.Class;
 
 namespace CPaint
 {
+	/// <summary>
+	/// Main Interface form 
+	/// </summary>
 	public partial class MainForm : Form
 	{
+		int initX, initY, radius = 0, height = 0, width = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+		string shapeName = "";
+
 		Output outputWindow = new Output();
+		/// <summary>
+		/// initializing all the components 
+		/// </summary>
 		public MainForm()
 		{
 			InitializeComponent();
@@ -42,7 +51,7 @@ namespace CPaint
 
 		}
 
-		public void AddLineNumbers()
+		private void AddLineNumbers()
 		{
 			Point pt = new Point(0, 0);
 			int First_Index = GetActiveEditor().GetCharIndexFromPosition(pt);
@@ -248,9 +257,6 @@ namespace CPaint
 			}
 		}
 
-
-
-
 		/// <summary>
 		/// To Open File 
 		/// </summary>
@@ -267,7 +273,7 @@ namespace CPaint
 			{
 				string Chosen_File = openFD.FileName;
 
-				MessageBox.Show(Chosen_File);
+			//	MessageBox.Show(Chosen_File);
 				tabPage = new TabPage(Chosen_File);
 				RichTextBox textBox = new RichTextBox();
 				textBox.LoadFile(Chosen_File, RichTextBoxStreamType.PlainText);
@@ -284,10 +290,6 @@ namespace CPaint
 				TabControl.SelectTab(tabPage);
 			}
 		}
-
-
-
-
 		/// <summary>
 		/// Removes 
 		/// </summary>
@@ -923,15 +925,43 @@ namespace CPaint
 
 		//}
 
+		private void closeOutput()
+		{
+			Form[] forms = Application.OpenForms.Cast<Form>().ToArray();
+			foreach (Form thisForm in forms)
+			{
+				if (thisForm.Name != "MainForm") thisForm.Close();
+			}
+		}
+
+		private void MessageShow(string message)
+		{
+			consoleBox.Text += message;
+		}
+
+		/// <summary>
+		/// Resets the X-axis and Y-axis pen position
+		/// </summary>
+
+		private void Reset()
+		{
+			initX = 0;
+			initY = 0;
+			radius = 0; height = 0; width = 0; x2 = 0; y2 = 0; x3 = 0; y3 = 0;
+		}
+
 		private void execute()
 		{
-
+			bool drawShape = false;
+			bool showOutput = false;
+			radius = 0; height = 0; width = 0; x2 = 0; y2 = 0; x3 = 0; y3 = 0;
+			closeOutput();
+			
 			Output outputWindow = new Output();
 			Compiler compiler = new Compiler();
 			string message = "";
 			string[] lines = GetActiveEditor().Lines;
 			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-			///string[] lines = { "circle(24)", "rectangle(80,56)" };
 
 			if (lines == null || lines.Length == 0)
 			{
@@ -941,20 +971,97 @@ namespace CPaint
 			{
 				foreach (var line in lines)
 				{
+					
 					try
 					{
-						Shape compiledShape = compiler.Compile(line);
-						outputWindow.Shapes.Add(compiledShape);
+						message = compiler.Compile(line);
+						if (message.Contains("Success"))
+						{
+							string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+							shapeName = code[0].Trim().ToLower();
+							if (shapeName.Equals("circle"))
+							{
+								radius = Convert.ToInt32(code[1].Trim());
+								drawShape = true;
+							}
+							else if (shapeName.Equals("rectangle"))
+							{
+
+								width = Convert.ToInt32(code[1].Trim());
+								height = Convert.ToInt32(code[2].Trim());
+								drawShape = true;
+							}
+							else if (shapeName.Equals("triangle"))
+							{
+								x2 = Convert.ToInt32(code[1].Trim());
+								y2 = Convert.ToInt32(code[2].Trim());
+								x3 = Convert.ToInt32(code[3].Trim());
+								y3 = Convert.ToInt32(code[4].Trim());
+								drawShape = true;
+							}
+							else if (shapeName.Equals("pen draw"))
+							{
+								x2 = Convert.ToInt32(code[1].Trim());
+								y2 = Convert.ToInt32(code[2].Trim());
+								drawShape = true;
+							}
+							else if (shapeName.Equals("position pen"))
+							{
+
+								initX = Convert.ToInt32(code[1].Trim());
+								initY = Convert.ToInt32(code[2].Trim());
+								drawShape = false;
+							}
+							else if (shapeName.Equals("reset"))
+							{
+								Reset();
+								drawShape = false;
+							}
+							else if (shapeName.Equals("clear"))
+							{
+								GetActiveEditor().Text = "";
+								consoleBox.Text = "";
+
+								
+							
+								outputWindow.ClearOutput();
+								outputWindow.Show();
+
+								consoleBox.Text += "\n Clear command executed Successfully. \n";
+							}
+
+							if (drawShape)
+							{
+								showOutput = true;
+							Shape compiledShape = ShapeFactory.CreateShape(shapeName, initX, initY, radius, height, width, x2, y2, x3, y3);
+
+							outputWindow.Shapes.Add(compiledShape);
+							}
+
+							consoleBox.Text += "\n" + message;
+						}
+						else
+						{
+							consoleBox.Text += "\n" + message;
+							showOutput = false;
+							break;
+						}
 					}
-					catch(Exception ex)
+					catch (Exception ex)
 					{
 						message = "Error :- Error in Drawing Shapes. " + ex.Message;
 						Console.WriteLine(message);
 						consoleBox.Text += message;
 					}
 				}
-				outputWindow.Show();
-				outputWindow.Invalidate();
+
+				if (showOutput) { 
+					//outputWindow.MdiParent = this;
+					outputWindow.Show();
+					outputWindow.Invalidate();
+					//outputWindow.Refresh();
+				}
+
 			}
 
 		}
@@ -965,12 +1072,11 @@ namespace CPaint
 			consoleBox.Clear();
 			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
 			execute();
+
 		}
 
 		private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
 		{
-
-
 			try
 			{
 				AddLineNumbers();
@@ -992,7 +1098,6 @@ namespace CPaint
 			}
 			catch (Exception ex)
 			{
-
 				Console.WriteLine("Exception Message: " + ex.Message);
 			}
 
@@ -1006,7 +1111,9 @@ namespace CPaint
 
 		private void ToolBtnRun_Click(object sender, EventArgs e)
 		{
+			this.IsMdiContainer = true;
 			Output output = new Output();
+			output.MdiParent = this;
 			output.Show();
 		}
 
@@ -1018,144 +1125,137 @@ namespace CPaint
 		/// <param name="e"></param>
 		private void consoleBox_KeyDown(object sender, KeyEventArgs e)
 		{
-			//	if (e.KeyCode == Keys.Enter)
-			//	{
-			//		try
-			//		{
-			//			int cursorPosition = consoleBox.SelectionStart;
-			//			int lineIndex = consoleBox.GetLineFromCharIndex(cursorPosition);
-			//			string lineText = consoleBox.Lines[lineIndex];
-			//			string[] code = lineText.Split(' ', ',', '(', ')');
-			//			code = code.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-			//			if (code[0].ToLower() == "clear")
-			//			{
-			//				try
-			//				{
-			//					if (outputWindow.IsDisposed)
-			//					{
-			//						outputWindow = new Output();
-			//					}
-			//					compiler = new Compiler(outputWindow);
-			//					compiler.ClearOutput();
+			if (e.KeyCode == Keys.Enter)
+			{
+				try
+				{
+					int cursorPosition = consoleBox.SelectionStart;
+					int lineIndex = consoleBox.GetLineFromCharIndex(cursorPosition);
+					string lineText = consoleBox.Lines[lineIndex];
+					string[] code = lineText.Split(' ', ',', '(', ')');
+					code = code.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+					if (code[0].ToLower() == "clear")
+					{
+						try
+						{
+							GetActiveEditor().Text = "";
+							consoleBox.Text = "";
 
-			//					//GetActiveEditor().Text = "";
-			//					//consoleBox.Text += "\n Clear command executed Successfully. \n";
-			//					consoleBox.Text = "";
-			//				}
-			//				catch (Exception ex)
-			//				{
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
-			//			}
-			//			else if (code[0].ToLower() == "run")
-			//			{
-			//				try
-			//				{
-			//					execute();
-			//					consoleBox.Text += "\n Run command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+							closeOutput();
+							Output outputWindow = new Output();
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
+							outputWindow.ClearOutput();
+							outputWindow.Show();
 
-			//			}
-			//			else if (code[0].ToLower() == "reset")
-			//			{
+							consoleBox.Text += "\n Clear command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+					}
+					else if (code[0].ToLower() == "run")
+					{
+						try
+						{
+							execute();
+							consoleBox.Text += "\n Run command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//				try
-			//				{
-			//					if (outputWindow.IsDisposed)
-			//					{
-			//						outputWindow = new Output();
-			//					}
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
 
-			//					compiler = new Compiler(outputWindow);
-			//					compiler.ResetOutput();
+					}
+					else if (code[0].ToLower() == "reset")
+					{
+						try
+						{
+							Reset();
 
-			//					consoleBox.Text += "\n Reset command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+							consoleBox.Text = "\n Reset command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Reset Command Execution Failed. \n";
+						}
 
 
-			//			}
-			//			else if (code[0].ToLower() == "save")
-			//			{
-			//				try
-			//				{
-			//					SaveFile();
-			//					consoleBox.Text += "\n Save command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+					}
+					else if (code[0].ToLower() == "save")
+					{
+						try
+						{
+							SaveFile();
+							consoleBox.Text += "\n Save command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
 
-			//			}
-			//			else if (code[0].ToLower() == "saveas")
-			//			{
-			//				try
-			//				{
-			//					SaveAsFile();
-			//					consoleBox.Text += "\n SaveAs command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+					}
+					else if (code[0].ToLower() == "saveas")
+					{
+						try
+						{
+							SaveAsFile();
+							consoleBox.Text += "\n SaveAs command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
-			//			}
-			//			else if (code[0].ToLower() == "close")
-			//			{
-			//				try
-			//				{
-			//					RemoveCurrentDocument();
-			//					consoleBox.Text += "\n Close command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
+					}
+					else if (code[0].ToLower() == "close")
+					{
+						try
+						{
+							RemoveCurrentDocument();
+							consoleBox.Text += "\n Close command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += "\n Command Execution Failed. \n";
-			//				}
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += "\n Command Execution Failed. \n";
+						}
 
-			//			}
-			//			else if (code[0].ToLower() == "open")
-			//			{
-			//				try
-			//				{
-			//					OpenFile();
-			//					consoleBox.Text += "\n Open command executed Successfully. \n";
-			//				}
-			//				catch (Exception ex)
-			//				{
+					}
+					else if (code[0].ToLower() == "open")
+					{
+						try
+						{
+							OpenFile();
+							consoleBox.Text += "\n Open command executed Successfully. \n";
+						}
+						catch (Exception ex)
+						{
 
-			//					Console.WriteLine("Exception Message: " + ex.Message);
-			//					consoleBox.Text += " \n Command Execution Failed. \n";
-			//				}
-			//			}
+							Console.WriteLine("Exception Message: " + ex.Message);
+							consoleBox.Text += " \n Command Execution Failed. \n";
+						}
+					}
 
-			//		}
-			//		catch (Exception ex)
-			//		{
+				}
+				catch (Exception ex)
+				{
 
-			//			Console.WriteLine("Exception Message: " + ex.Message);
+					Console.WriteLine("Exception Message: " + ex.Message);
 
-			//		}
+				}
 
 
-			//	}
+			}
 		}
 
 		private void pictureBox1_Click(object sender, EventArgs e)

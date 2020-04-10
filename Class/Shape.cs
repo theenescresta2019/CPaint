@@ -6,8 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CPaint.Class
-{		public abstract class Shape
-		{
-			public abstract void Draw(Graphics surface);
-		}
+{
+	/// <summary>
+	/// Abstract class for shape 
+	/// </summary>
+	public abstract class Shape
+	{
+		/// <summary>
+		/// Draw Method 
+		/// </summary>
+		/// <param name="surface">object of Graphics</param>
+		public abstract void Draw(Graphics surface);
+	}
 }
+;

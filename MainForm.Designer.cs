@@ -413,7 +413,7 @@
 			this.TabControl.Location = new System.Drawing.Point(33, 51);
 			this.TabControl.Name = "TabControl";
 			this.TabControl.SelectedIndex = 0;
-			this.TabControl.Size = new System.Drawing.Size(690, 180);
+			this.TabControl.Size = new System.Drawing.Size(690, 220);
 			this.TabControl.TabIndex = 1;
 			this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
 			this.TabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Selecting);
@@ -669,9 +669,9 @@
 			this.consoleBox.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.consoleBox.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.consoleBox.ForeColor = System.Drawing.SystemColors.Window;
-			this.consoleBox.Location = new System.Drawing.Point(33, 231);
+			this.consoleBox.Location = new System.Drawing.Point(33, 271);
 			this.consoleBox.Name = "consoleBox";
-			this.consoleBox.Size = new System.Drawing.Size(690, 200);
+			this.consoleBox.Size = new System.Drawing.Size(690, 160);
 			this.consoleBox.TabIndex = 4;
 			this.consoleBox.Text = "";
 			this.consoleBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.consoleBox_KeyDown);
@@ -760,7 +760,7 @@
 		private System.Windows.Forms.ToolStripButton ToolBtnBgColor;
 		private System.Windows.Forms.ToolStripButton ToolBtnOpen;
 		private System.Windows.Forms.RichTextBox richLine;
-		public System.Windows.Forms.RichTextBox consoleBox;
+		private System.Windows.Forms.RichTextBox consoleBox;
 	}
 }
 
