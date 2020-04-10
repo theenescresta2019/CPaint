@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Graphical Programming Language Application (named as CPaint in my assignment) is a desktop application built in C# .net Framework. CPaint is developed by Dinesh K. Shrestha. In this application, you can draw basic shapes like line, circle, triangle, rectangle. You can save your codings, run, debug. 
+Following are the command, their use and syntax: 
+Positon pen (int32 X-axis, int32 Y-axis) : 
+This command sets the initial position i.e X-axis and Y-axis in the drawing canvas. 
+Example: Position Pen(200,100)
+By default its value is set to be (0,0)
+
+Pen Draw(int32 X-axis1, int 32 Y-axis1):
+This command draws the line from the pen position to your input position. 
+Example: 
+Position Pen(10,10)
+Pen Draw(100,100)
+This example draws the line from point(10,10) to point (100,100)
+
+Rectangle(Width, Height):
+This command draws the rectangle based on user input and its pen position. 
+Example: 
+Position Pen(10,10)
+Rectangle(25,50)
+This example draws the rectangle with width of 25 and height of 50 from point 10,10
+
+Circle(Radius):
+This circle command draws the circle. 
+Example: 
+Position Pen (100,100)
+Circle(110) 
+This example draws the circle with radius 110 from point 100,100. 
+Triangle(point1, point2, point3):
+This command draws the triangle. The correct syntax for drawing triangle is 
+Triangle ((x1,y1),(x2,y2))
+The initial point is the current pen position. If you need to draw in different place then set pen position. 
+Example: 
+Position pen (200,300)
+Triangle ((390, 40),(90,199))
+This example draws the triangle with points (200,300), (390, 40),(90,199)
+
+This command draws the line from the pen position to your input position. 
+Example: 
+Position Pen(10,10)
+Pen Draw(100,100)
+This example draws the line from point(10,10) to point (100,100)
+
+
+Notes: 
+All the commands are case insensitive.
+Instead of using brackets”()” you can also use comma “,”.
+You don’t need to end statement by semicolon “;”. 
+Commands should be entered in new line by pressing enter. 
+Pen color is set to Black and thickness to 2 by default. You cannot change this default in this version of CPaint. 
+
+Shortcuts and its Uses: 
+Ctrl + A= selects all text
+Ctrl + C =Copy 
+Ctrl + X= Cut
+Ctrl + Z = Undo 
+Ctrl + Y= Redo 
+Ctrl + Shift + S= Save As 
+Ctrl + S = Save 
+Ctrl + D= Debug
+Ctrl + R= Run 
+Ctrl + N= New file
+Ctrl + W = Close Tab 
+Ctrl + Shift + Q = Close all the window 
+Alt + F4= Exit Application 
+Ctrl + ‘+’= Zoom In 
+Ctrl + ‘-’= Zoom Out 
+</value>
+  </data>
+</root>

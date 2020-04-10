@@ -704,7 +704,8 @@ namespace CPaint
 		private void toolStripMenuItem9_Click(object sender, EventArgs e)
 #pragma warning restore IDE1006 // Naming Styles
 		{
-
+			Help help = new Help();
+			help.Show();
 		}
 
 		private void ToolStripButton1_Click_2(object sender, EventArgs e)
@@ -952,6 +953,8 @@ namespace CPaint
 
 		private void execute()
 		{
+			consoleBox.Clear();
+			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
 			bool drawShape = false;
 			bool showOutput = false;
 			radius = 0; height = 0; width = 0; x2 = 0; y2 = 0; x3 = 0; y3 = 0;
@@ -1051,7 +1054,7 @@ namespace CPaint
 					{
 						message = "Error :- Error in Drawing Shapes. " + ex.Message;
 						Console.WriteLine(message);
-						consoleBox.Text += message;
+						consoleBox.Text += "\n" + message;
 					}
 				}
 
@@ -1066,12 +1069,46 @@ namespace CPaint
 
 		}
 
-
-		private void ToolBtnDebug_Click(object sender, EventArgs e)
+		private void debug()
 		{
 			consoleBox.Clear();
 			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
+			closeOutput();
+
+			Compiler compiler = new Compiler();
+			string message = "";
+			string[] lines = GetActiveEditor().Lines;
+			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+			if (lines == null || lines.Length == 0)
+			{
+				consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
+			}
+			else
+			{
+				foreach (var line in lines)
+				{
+					message = compiler.Compile(line);
+					consoleBox.Text += "\n" + message;
+
+				}
+
+			}
+		}
+
+		private void toolStripMenuItem6_Click(object sender, EventArgs e)
+		{
+			debug();
+		}
+
+		private void toolStripMenuItem3_Click(object sender, EventArgs e)
+		{
 			execute();
+		}
+
+		private void ToolBtnDebug_Click(object sender, EventArgs e)
+		{
+			debug();
 
 		}
 
@@ -1111,10 +1148,8 @@ namespace CPaint
 
 		private void ToolBtnRun_Click(object sender, EventArgs e)
 		{
-			this.IsMdiContainer = true;
-			Output output = new Output();
-			output.MdiParent = this;
-			output.Show();
+		
+			execute();
 		}
 
 		/// <summary>

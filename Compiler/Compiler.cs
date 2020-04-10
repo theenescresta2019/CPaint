@@ -8,7 +8,7 @@ using CPaint.Class;
 
 namespace CPaint.Compilers
 {
-	class Compiler
+	public class Compiler
 	{
 		//initializing all the variables 
 
