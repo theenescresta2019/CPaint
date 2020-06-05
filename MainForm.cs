@@ -37,6 +37,7 @@ namespace CPaint
 		/// get Active Editor in the tab.
 		/// </summary>
 		/// <returns>Returns Active Editor in the TAB.</returns>
+		
 		private RichTextBox GetActiveEditor()
 		{
 			tabPage = TabControl.SelectedTab;
@@ -140,10 +141,6 @@ namespace CPaint
 			}
 			else
 			{
-				//			string name = GetActiveEditor().Name;
-				//string tabName = TabControl.SelectedTab.Name;
-				//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
-				//	MessageBox.Show(TabControl.SelectedTab.Name);
 
 				string tabName = TabControl.SelectedTab.Name;
 				if (tabName == "New")
@@ -214,13 +211,6 @@ namespace CPaint
 			}
 			else
 			{
-
-
-				//			string name = GetActiveEditor().Name;
-				//string tabName = TabControl.SelectedTab.Name;
-				//string tabName = TabControl.TabPages[TabControl.SelectedIndex].Name.ToString();
-				//	MessageBox.Show(TabControl.SelectedTab.Name);
-
 				SaveFileDialog saveFileDialog = new SaveFileDialog
 				{
 					InitialDirectory = @"D:\",
@@ -982,6 +972,7 @@ namespace CPaint
 						{
 							string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
 							shapeName = code[0].Trim().ToLower();
+							consoleBox.Text += "\n" + message;
 							if (shapeName.Equals("circle"))
 							{
 								radius = Convert.ToInt32(code[1].Trim());
@@ -1013,11 +1004,14 @@ namespace CPaint
 
 								initX = Convert.ToInt32(code[1].Trim());
 								initY = Convert.ToInt32(code[2].Trim());
+								consoleBox.Text += "\n Pen position set successfully to (" + initX + "," + initY + ").";
 								drawShape = false;
 							}
 							else if (shapeName.Equals("reset"))
 							{
 								Reset();
+								consoleBox.Text += "\n Pen position reset successfully to (" + initX + "," + initY + ").";
+
 								drawShape = false;
 							}
 							else if (shapeName.Equals("clear"))
@@ -1025,8 +1019,6 @@ namespace CPaint
 								GetActiveEditor().Text = "";
 								consoleBox.Text = "";
 
-								
-							
 								outputWindow.ClearOutput();
 								outputWindow.Show();
 
@@ -1041,7 +1033,7 @@ namespace CPaint
 							outputWindow.Shapes.Add(compiledShape);
 							}
 
-							consoleBox.Text += "\n" + message;
+							
 						}
 						else
 						{
@@ -1210,6 +1202,7 @@ namespace CPaint
 						try
 						{
 							Reset();
+							consoleBox.Text += "\n Pen position set successfully. (" + initX + "," + initY + ").";
 
 							consoleBox.Text = "\n Reset command executed Successfully. \n";
 						}

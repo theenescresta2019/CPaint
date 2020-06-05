@@ -70,13 +70,11 @@ namespace CPaint.Compilers
 						if (IsNumeric(code[1].Trim()))
 						{
 							message = "Success :- " + code[0] + "(" + code[1] + ") is correct syntax and parameter.";
-
 						}
 						else
 						{
 							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius) ";
 							Console.WriteLine(message);
-
 						}
 					}
 					else

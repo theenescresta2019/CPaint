@@ -39,13 +39,10 @@ namespace CPaint
 		/// <param name="e">Paint Event object </param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			
 			foreach (Shape shapeToDraw in Shapes)
 			{
 				shapeToDraw.Draw(e.Graphics);
 			}
-
-			
 
 		}
 
