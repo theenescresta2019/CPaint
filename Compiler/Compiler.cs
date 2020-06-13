@@ -14,7 +14,7 @@ namespace CPaint.Compilers
 
 
 		//putting all the pre-defined commands in an commands array and making it readonly
-		readonly string[] commands = { "clear", "reset", "rectangle", "circle", "triangle", "position pen", "pen draw" };
+		readonly string[] commands = { "clear", "reset", "rectangle", "circle", "triangle", "moveto", "drawto" };
 		public string Line { get; set; }
 		public Compiler() { }
 
@@ -65,7 +65,7 @@ namespace CPaint.Compilers
 				shapeName = code[0].Trim().ToLower();
 				if (shapeName.Equals("circle"))
 				{
-					if (count >= 2)
+					if (count == 2)
 					{
 						if (IsNumeric(code[1].Trim()))
 						{
@@ -86,7 +86,7 @@ namespace CPaint.Compilers
 				}
 				else if (shapeName.Equals("rectangle"))
 				{
-					if (count >= 3)
+					if (count == 3)
 					{
 						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
 						{
@@ -109,7 +109,7 @@ namespace CPaint.Compilers
 				}
 				else if (shapeName.Equals("triangle"))
 				{
-					if (count >= 5)
+					if (count == 5)
 					{
 						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()) && IsNumeric(code[3].Trim()) && IsNumeric(code[4].Trim()))
 						{
@@ -127,9 +127,9 @@ namespace CPaint.Compilers
 						Console.WriteLine(message);
 					}
 				}
-				else if (shapeName.Equals("pen draw"))
+				else if (shapeName.Equals("drawto"))
 				{
-					if (count >= 3)
+					if (count == 3)
 					{
 						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
 						{
@@ -139,19 +139,19 @@ namespace CPaint.Compilers
 						}
 						else
 						{
-							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: pen draw(X-axis2,Y-axis2). Note that initial points is current pen position.";
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
 							Console.WriteLine(message);
 						}
 					}
 					else
 					{
-						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: pen draw(X-axis2,Y-axis2). Note that initial points is current pen position.";
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
 						Console.WriteLine(message);
 					}
 				}
-				else if (shapeName.Equals("position pen"))
+				else if (shapeName.Equals("moveto"))
 				{
-					if (count >= 3)
+					if (count == 3)
 					{
 						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
 						{
@@ -161,13 +161,13 @@ namespace CPaint.Compilers
 						}
 						else
 						{
-							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: position pen (X-axis,Y-axis)";
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: moveto(X-axis,Y-axis)";
 							Console.WriteLine(message);
 						}
 					}
 					else
 					{
-						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: position pen (X-axis,Y-axis)";
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: move to (X-axis,Y-axis)";
 						Console.WriteLine(message);
 
 					}
@@ -278,7 +278,7 @@ namespace CPaint.Compilers
 	//				validation = "fail";
 	//			}
 	//		}
-	//		else if (shapeName.Equals("pen draw"))
+	//		else if (shapeName.Equals("drawto"))
 	//		{
 	//			if (count >= 3)
 	//			{
@@ -303,7 +303,7 @@ namespace CPaint.Compilers
 	//				validation = "fail";
 	//			}
 	//		}
-	//		else if (shapeName.Equals("position pen"))
+	//		else if (shapeName.Equals("moveto"))
 	//		{
 	//			if (count >= 3)
 	//			{
@@ -406,8 +406,8 @@ namespace CPaint.Compilers
 	//				}
 
 	//			}
-	//			//condition if the command is position pen and checking for parameter 
-	//			else if (code[0].Trim().ToLower().Equals("position pen"))
+	//			//condition if the command is moveto and checking for parameter 
+	//			else if (code[0].Trim().ToLower().Equals("moveto"))
 	//			{
 	//				try
 	//				{
@@ -433,7 +433,7 @@ namespace CPaint.Compilers
 	//				}
 
 	//			}
-	//			else if (code[0].Trim().ToLower().Equals("position pen"))
+	//			else if (code[0].Trim().ToLower().Equals("moveto"))
 	//			{
 	//				try
 	//				{
@@ -457,7 +457,7 @@ namespace CPaint.Compilers
 	//				}
 
 	//			}
-	//			else if (code[0].Trim().ToLower().Equals("pen draw"))
+	//			else if (code[0].Trim().ToLower().Equals("drawto"))
 	//			{
 	//				try
 	//				{

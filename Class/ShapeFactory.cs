@@ -36,7 +36,7 @@ namespace CPaint.Class
 					return new Rectangle() { InitX = initX, InitY = initY, Width = width, Height = height };
 				case "triangle":
 					return new Triangle() { initX = initX, initY = initY, x2 = x2, y2 = y2, x3 = x3, y3 = y3 };
-				case "pen draw":
+				case "drawto":
 					return new Line() { InitX = initX, InitY = initY, X2 = x2, Y2 = y2 };
 				default:
 					throw new NotSupportedException("shapeName");

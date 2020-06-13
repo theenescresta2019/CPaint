@@ -993,24 +993,24 @@ namespace CPaint
 								y3 = Convert.ToInt32(code[4].Trim());
 								drawShape = true;
 							}
-							else if (shapeName.Equals("pen draw"))
+							else if (shapeName.Equals("drawto"))
 							{
 								x2 = Convert.ToInt32(code[1].Trim());
 								y2 = Convert.ToInt32(code[2].Trim());
 								drawShape = true;
 							}
-							else if (shapeName.Equals("position pen"))
+							else if (shapeName.Equals("moveto"))
 							{
 
 								initX = Convert.ToInt32(code[1].Trim());
 								initY = Convert.ToInt32(code[2].Trim());
-								consoleBox.Text += "\n Pen position set successfully to (" + initX + "," + initY + ").";
+								consoleBox.Text += "\n Moveto set successfully to (" + initX + "," + initY + ").";
 								drawShape = false;
 							}
 							else if (shapeName.Equals("reset"))
 							{
 								Reset();
-								consoleBox.Text += "\n Pen position reset successfully to (" + initX + "," + initY + ").";
+								consoleBox.Text += "\n Moveto reset successfully to (" + initX + "," + initY + ").";
 
 								drawShape = false;
 							}
