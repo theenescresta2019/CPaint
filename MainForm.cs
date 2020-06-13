@@ -941,6 +941,21 @@ namespace CPaint
 			radius = 0; height = 0; width = 0; x2 = 0; y2 = 0; x3 = 0; y3 = 0;
 		}
 
+
+
+		private bool DeclareVariable(string text)
+		{
+			bool result = true;
+
+
+
+
+			return result;
+		}
+
+
+
+
 		private void execute()
 		{
 			consoleBox.Clear();
