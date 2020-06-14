@@ -14,9 +14,7 @@ namespace CPaint
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		int initX, initY, radius = 0, height = 0, width = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-		string shapeName = "";
-
+	
 		Output outputWindow = new Output();
 		/// <summary>
 		/// initializing all the components 
@@ -25,6 +23,9 @@ namespace CPaint
 		{
 			InitializeComponent();
 		}
+
+		int initX, initY, radius = 0, height = 0, width = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+		string shapeName = "";
 
 		private TabPage tabPage;
 		Color canvasColor = Color.DarkSlateBlue;
@@ -37,7 +38,7 @@ namespace CPaint
 		/// get Active Editor in the tab.
 		/// </summary>
 		/// <returns>Returns Active Editor in the TAB.</returns>
-		
+
 		private RichTextBox GetActiveEditor()
 		{
 			tabPage = TabControl.SelectedTab;
@@ -200,7 +201,6 @@ namespace CPaint
 
 		}
 
-
 		private void SaveAsFile()
 		{
 
@@ -263,7 +263,7 @@ namespace CPaint
 			{
 				string Chosen_File = openFD.FileName;
 
-			//	MessageBox.Show(Chosen_File);
+				//	MessageBox.Show(Chosen_File);
 				tabPage = new TabPage(Chosen_File);
 				RichTextBox textBox = new RichTextBox();
 				textBox.LoadFile(Chosen_File, RichTextBoxStreamType.PlainText);
@@ -885,38 +885,216 @@ namespace CPaint
 
 		}
 
+		/// <summary>
+		/// Check whether syntax is correct or not 
+		/// </summary>
+		/// <param name="syntax">name of syntax </param>
+		/// <returns>true or false </returns>
+		private bool IsSyntax(string syntax)
+		{
+			bool result = false;
+			if (Array.Exists(commands, element => element == syntax.ToLower().Trim()))
+			{
+				result = true;
+			}
+			return result;
+		}
 
-		//private void execute()
-		//{
-		//	Output outputWindow = new Output();
-		//	Compiler compiler = new Compiler();
-		//	//compiler = new Compiler(outputWindow);
-		//	//get all text and save in lines string array
-		//	string output = "";
-		//	string[] lines = GetActiveEditor().Lines;
-		//	lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-		//	if (lines == null || lines.Length == 0)
-		//	{
-		//		consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
-		//	}
-		//	else
-		//	{
-		//		foreach (var line in lines)
-		//		{
-		//			output = compiler.Compile(line);
-		//			consoleBox.Text += "\n" + output;
-		//			if (output.Contains("Error"))
-		//			{
-		//			break;
-		//			}
-		//		}
+		private bool IsNumeric(string number)
+		{
+			bool result = false;
+			try
+			{
+				Convert.ToInt32(number);
+				result = true;
+			}
+			catch
+			{
+				result = false;
+			}
 
-		//	}
+			return result;
+		}
+
+		/// <summary>
+		/// Compiles the program by checking its syntax and parameters and return message
+		/// </summary>
+		/// <param name="line">line in the text editor </param>
+		/// <returns>Reurns success or error message regarding code </returns>
+		public string Compile(string line)
+		{
+			string shapeName = "";
+			string message = "";
+			string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+			int count = code.Count();
+			if (IsSyntax(code[0]))
+			{
+				shapeName = code[0].Trim().ToLower();
+				if (shapeName.Equals("circle"))
+				{
+					if (count == 2)
+					{
+						if (IsNumeric(code[1].Trim()))
+						{
+							message = "Success :- " + code[0] + "(" + code[1] + ") is correct syntax and parameter.";
+						}
+						else
+						{
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius) ";
+							Console.WriteLine(message);
+						}
+					}
+					else
+					{
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius)";
+						Console.WriteLine(message);
+					}
+
+				}
+				else if (shapeName.Equals("rectangle"))
+				{
+					if (count == 3)
+					{
+						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+						{
+							message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
+
+						}
+						else
+						{
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width,Height)";
+							Console.WriteLine(message);
+
+						}
+					}
+					else
+					{
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width, Height)";
+						Console.WriteLine(message);
+
+					}
+				}
+				else if (shapeName.Equals("triangle"))
+				{
+					if (count == 5)
+					{
+						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()) && IsNumeric(code[3].Trim()) && IsNumeric(code[4].Trim()))
+						{
+							message = "Success :- " + code[0] + "((" + code[1] + "," + code[2] + ")" + "(" + code[3] + ", " + code[4] + ")) is correct syntax and parameter.";
+						}
+						else
+						{
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
+							Console.WriteLine(message);
+						}
+					}
+					else
+					{
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
+						Console.WriteLine(message);
+					}
+				}
+				else if (shapeName.Equals("drawto"))
+				{
+					if (count == 3)
+					{
+						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+						{
+
+							message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
+
+						}
+						else
+						{
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
+							Console.WriteLine(message);
+						}
+					}
+					else
+					{
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
+						Console.WriteLine(message);
+					}
+				}
+				else if (shapeName.Equals("moveto"))
+				{
+					if (count == 3)
+					{
+						if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+						{
+							message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
 
 
-		//}
+						}
+						else
+						{
+							message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: moveto(X-axis,Y-axis)";
+							Console.WriteLine(message);
+						}
+					}
+					else
+					{
+						message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: move to (X-axis,Y-axis)";
+						Console.WriteLine(message);
 
-		private void closeOutput()
+					}
+				}
+				else if (shapeName.Equals("reset"))
+				{
+
+					message = "Success: Command Reset is Correct syntax";
+
+				}
+				else if (shapeName.Equals("clear"))
+				{
+					//					message = "Success :- Clear command found";
+					message = "Error :- Command found but please enter " + code[0] + " in command line below.";
+					Console.WriteLine(message);
+				}
+
+			}
+			else
+			{
+				message = "Error :- Invalid Syntax. " + code[0] + " Please check and run the program again.";
+				Console.WriteLine(message);
+			}
+			return message;
+		}
+
+	
+
+
+	//private void execute()
+	//{
+	//	Output outputWindow = new Output();
+	//	Compiler compiler = new Compiler();
+	//	//compiler = new Compiler(outputWindow);
+	//	//get all text and save in lines string array
+	//	string output = "";
+	//	string[] lines = GetActiveEditor().Lines;
+	//	lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+	//	if (lines == null || lines.Length == 0)
+	//	{
+	//		consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
+	//	}
+	//	else
+	//	{
+	//		foreach (var line in lines)
+	//		{
+	//			output = compiler.Compile(line);
+	//			consoleBox.Text += "\n" + output;
+	//			if (output.Contains("Error"))
+	//			{
+	//			break;
+	//			}
+	//		}
+
+	//	}
+
+
+	//}
+
+	private void closeOutput()
 		{
 			Form[] forms = Application.OpenForms.Cast<Form>().ToArray();
 			foreach (Form thisForm in forms)
@@ -943,14 +1121,24 @@ namespace CPaint
 
 
 
-		private bool DeclareVariable(string text)
+		private int CheckVariables(string variable)
 		{
-			bool result = true;
+			int loop;
+			int variableCounter;
+			for (loop = 0 to variableCounter)
+			{
 
+				if (variableNames[loop] == name)
+				{
+					return loop;
+				}
+				else
+				{
+					return -1;
+				}
+//				loop++;
+			}
 
-
-
-			return result;
 		}
 
 
@@ -964,9 +1152,9 @@ namespace CPaint
 			bool showOutput = false;
 			radius = 0; height = 0; width = 0; x2 = 0; y2 = 0; x3 = 0; y3 = 0;
 			closeOutput();
-			
+
 			Output outputWindow = new Output();
-			Compiler compiler = new Compiler();
+			//Compiler compiler = new Compiler();
 			string message = "";
 			string[] lines = GetActiveEditor().Lines;
 			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
@@ -979,10 +1167,10 @@ namespace CPaint
 			{
 				foreach (var line in lines)
 				{
-					
+
 					try
 					{
-						message = compiler.Compile(line);
+						message = Compile(line);
 						if (message.Contains("Success"))
 						{
 							string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
@@ -1043,12 +1231,12 @@ namespace CPaint
 							if (drawShape)
 							{
 								showOutput = true;
-							Shape compiledShape = ShapeFactory.CreateShape(shapeName, initX, initY, radius, height, width, x2, y2, x3, y3);
+								Shape compiledShape = ShapeFactory.CreateShape(shapeName, initX, initY, radius, height, width, x2, y2, x3, y3);
 
-							outputWindow.Shapes.Add(compiledShape);
+								outputWindow.Shapes.Add(compiledShape);
 							}
 
-							
+
 						}
 						else
 						{
@@ -1065,7 +1253,8 @@ namespace CPaint
 					}
 				}
 
-				if (showOutput) { 
+				if (showOutput)
+				{
 					//outputWindow.MdiParent = this;
 					outputWindow.Show();
 					outputWindow.Invalidate();
@@ -1082,7 +1271,7 @@ namespace CPaint
 			consoleBox.Text = " \n CPaint Compiler:- Compiling Started... \n";
 			closeOutput();
 
-			Compiler compiler = new Compiler();
+			//Compiler compiler = new Compiler();
 			string message = "";
 			string[] lines = GetActiveEditor().Lines;
 			lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
@@ -1095,7 +1284,7 @@ namespace CPaint
 			{
 				foreach (var line in lines)
 				{
-					message = compiler.Compile(line);
+					message = Compile(line);
 					consoleBox.Text += "\n" + message;
 
 				}
@@ -1155,7 +1344,7 @@ namespace CPaint
 
 		private void ToolBtnRun_Click(object sender, EventArgs e)
 		{
-		
+
 			execute();
 		}
 
