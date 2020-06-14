@@ -16,7 +16,7 @@ namespace CPaint.Compilers
 		//putting all the pre-defined commands in an commands array and making it readonly
 		readonly string[] commands = { "clear", "reset", "rectangle", "circle", "triangle", "moveto", "drawto","var" };
 		public string Line { get; set; }
-		public Compiler() { }
+		//public Compiler() { }
 
 		/// <summary>
 		/// Check whether syntax is correct or not 

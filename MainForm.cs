@@ -14,7 +14,7 @@ namespace CPaint
 	/// </summary>
 	public partial class MainForm : Form
 	{
-	
+
 		Output outputWindow = new Output();
 		/// <summary>
 		/// initializing all the components 
@@ -1061,40 +1061,40 @@ namespace CPaint
 			return message;
 		}
 
-	
 
 
-	//private void execute()
-	//{
-	//	Output outputWindow = new Output();
-	//	Compiler compiler = new Compiler();
-	//	//compiler = new Compiler(outputWindow);
-	//	//get all text and save in lines string array
-	//	string output = "";
-	//	string[] lines = GetActiveEditor().Lines;
-	//	lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-	//	if (lines == null || lines.Length == 0)
-	//	{
-	//		consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
-	//	}
-	//	else
-	//	{
-	//		foreach (var line in lines)
-	//		{
-	//			output = compiler.Compile(line);
-	//			consoleBox.Text += "\n" + output;
-	//			if (output.Contains("Error"))
-	//			{
-	//			break;
-	//			}
-	//		}
 
-	//	}
+		//private void execute()
+		//{
+		//	Output outputWindow = new Output();
+		//	Compiler compiler = new Compiler();
+		//	//compiler = new Compiler(outputWindow);
+		//	//get all text and save in lines string array
+		//	string output = "";
+		//	string[] lines = GetActiveEditor().Lines;
+		//	lines = lines.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+		//	if (lines == null || lines.Length == 0)
+		//	{
+		//		consoleBox.Text += "\n Error: Compiling Failed. Empty File.";
+		//	}
+		//	else
+		//	{
+		//		foreach (var line in lines)
+		//		{
+		//			output = compiler.Compile(line);
+		//			consoleBox.Text += "\n" + output;
+		//			if (output.Contains("Error"))
+		//			{
+		//			break;
+		//			}
+		//		}
+
+		//	}
 
 
-	//}
+		//}
 
-	private void closeOutput()
+		private void closeOutput()
 		{
 			Form[] forms = Application.OpenForms.Cast<Form>().ToArray();
 			foreach (Form thisForm in forms)
@@ -1123,11 +1123,10 @@ namespace CPaint
 
 		private int CheckVariables(string variable)
 		{
-			int loop;
+			string name = 'dinesh';
 			int variableCounter;
-			for (loop = 0 to variableCounter)
+			for (int loop = 0; loop < variableCounter; loop++)
 			{
-
 				if (variableNames[loop] == name)
 				{
 					return loop;
@@ -1136,9 +1135,7 @@ namespace CPaint
 				{
 					return -1;
 				}
-//				loop++;
 			}
-
 		}
 
 
