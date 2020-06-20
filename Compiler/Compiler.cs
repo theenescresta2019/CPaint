@@ -8,193 +8,194 @@ using CPaint.Class;
 
 namespace CPaint.Compilers
 {
-	public class Compiler
-	{
-		//initializing all the variables 
+
+//	public class Compiler
+//	{
+//		//initializing all the variables 
 
 
-		//putting all the pre-defined commands in an commands array and making it readonly
-	//	readonly string[] commands = { "clear", "reset", "rectangle", "circle", "triangle", "moveto", "drawto","var" };
-	//	public string Line { get; set; }
-		//public Compiler() { }
+//		//putting all the pre-defined commands in an commands array and making it readonly
+//	//	readonly string[] commands = { "clear", "reset", "rectangle", "circle", "triangle", "moveto", "drawto","var" };
+//	//	public string Line { get; set; }
+//		//public Compiler() { }
 
-		//// <summary>
-		//// Check whether syntax is correct or not 
-		//// </summary>
-		//// <param name="syntax">name of syntax </param>
-		//// <returns>true or false </returns>
-		////private bool IsSyntax(string syntax)
-		//{
-		//	bool result = false;
-		//	if (Array.Exists(commands, element => element == syntax.ToLower().Trim()))
-		//	{
-		//		result = true;
-		//	}
-		//	return result;
-		//}
+//		//// <summary>
+//		//// Check whether syntax is correct or not 
+//		//// </summary>
+//		//// <param name="syntax">name of syntax </param>
+//		//// <returns>true or false </returns>
+//		////private bool IsSyntax(string syntax)
+//		//{
+//		//	bool result = false;
+//		//	if (Array.Exists(commands, element => element == syntax.ToLower().Trim()))
+//		//	{
+//		//		result = true;
+//		//	}
+//		//	return result;
+//		//}
 
-		//private bool IsNumeric(string number)
-		//{
-		//	bool result = false;
-		//	try
-		//	{
-		//		Convert.ToInt32(number);
-		//		result = true;
-		//	}
-		//	catch 
-		//	{
-		//		result = false;
-		//	}
+//		//private bool IsNumeric(string number)
+//		//{
+//		//	bool result = false;
+//		//	try
+//		//	{
+//		//		Convert.ToInt32(number);
+//		//		result = true;
+//		//	}
+//		//	catch 
+//		//	{
+//		//		result = false;
+//		//	}
 
-		//	return result;
-		//}
+//		//	return result;
+//		//}
 
-///// <summary>
-//// Compiles the program by checking its syntax and parameters and return message
-//// </summary>
-//// <param name="line">line in the text editor </param>
-//// <returns>Reurns success or error message regarding code </returns>
-		//public string Compile(string line)
-		//{
-		//	string shapeName = "";
-		//	string message = "";
-		//	string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-		//	int count = code.Count();
-		//	if (IsSyntax(code[0]))
-		//	{
-		//		shapeName = code[0].Trim().ToLower();
-		//		if (shapeName.Equals("circle"))
-		//		{
-		//			if (count == 2)
-		//			{
-		//				if (IsNumeric(code[1].Trim()))
-		//				{
-		//					message = "Success :- " + code[0] + "(" + code[1] + ") is correct syntax and parameter.";
-		//				}
-		//				else
-		//				{
-		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius) ";
-		//					Console.WriteLine(message);
-		//				}
-		//			}
-		//			else
-		//			{
-		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius)";
-		//				Console.WriteLine(message);
-		//			}
+/////// <summary>
+////// Compiles the program by checking its syntax and parameters and return message
+////// </summary>
+////// <param name="line">line in the text editor </param>
+////// <returns>Reurns success or error message regarding code </returns>
+//		//public string Compile(string line)
+//		//{
+//		//	string shapeName = "";
+//		//	string message = "";
+//		//	string[] code = line.Split(new char[] { ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+//		//	int count = code.Count();
+//		//	if (IsSyntax(code[0]))
+//		//	{
+//		//		shapeName = code[0].Trim().ToLower();
+//		//		if (shapeName.Equals("circle"))
+//		//		{
+//		//			if (count == 2)
+//		//			{
+//		//				if (IsNumeric(code[1].Trim()))
+//		//				{
+//		//					message = "Success :- " + code[0] + "(" + code[1] + ") is correct syntax and parameter.";
+//		//				}
+//		//				else
+//		//				{
+//		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius) ";
+//		//					Console.WriteLine(message);
+//		//				}
+//		//			}
+//		//			else
+//		//			{
+//		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: circle(radius)";
+//		//				Console.WriteLine(message);
+//		//			}
 
-		//		}
-		//		else if (shapeName.Equals("rectangle"))
-		//		{
-		//			if (count == 3)
-		//			{
-		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
-		//				{
-		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
+//		//		}
+//		//		else if (shapeName.Equals("rectangle"))
+//		//		{
+//		//			if (count == 3)
+//		//			{
+//		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+//		//				{
+//		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
 
-		//				}
-		//				else
-		//				{
-		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width,Height)";
-		//					Console.WriteLine(message);
+//		//				}
+//		//				else
+//		//				{
+//		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width,Height)";
+//		//					Console.WriteLine(message);
 
-		//				}
-		//			}
-		//			else
-		//			{
-		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width, Height)";
-		//				Console.WriteLine(message);
+//		//				}
+//		//			}
+//		//			else
+//		//			{
+//		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: rectangle(Width, Height)";
+//		//				Console.WriteLine(message);
 
-		//			}
-		//		}
-		//		else if (shapeName.Equals("triangle"))
-		//		{
-		//			if (count == 5)
-		//			{
-		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()) && IsNumeric(code[3].Trim()) && IsNumeric(code[4].Trim()))
-		//				{
-		//					message = "Success :- " + code[0] + "((" + code[1] + "," + code[2] + ")" + "(" + code[3] + ", " + code[4] + ")) is correct syntax and parameter.";
-		//				}
-		//				else
-		//				{
-		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
-		//					Console.WriteLine(message);
-		//				}
-		//			}
-		//			else
-		//			{
-		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
-		//				Console.WriteLine(message);
-		//			}
-		//		}
-		//		else if (shapeName.Equals("drawto"))
-		//		{
-		//			if (count == 3)
-		//			{
-		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
-		//				{
+//		//			}
+//		//		}
+//		//		else if (shapeName.Equals("triangle"))
+//		//		{
+//		//			if (count == 5)
+//		//			{
+//		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()) && IsNumeric(code[3].Trim()) && IsNumeric(code[4].Trim()))
+//		//				{
+//		//					message = "Success :- " + code[0] + "((" + code[1] + "," + code[2] + ")" + "(" + code[3] + ", " + code[4] + ")) is correct syntax and parameter.";
+//		//				}
+//		//				else
+//		//				{
+//		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
+//		//					Console.WriteLine(message);
+//		//				}
+//		//			}
+//		//			else
+//		//			{
+//		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: triangle((X-axis2,Y-axis2),(X-axis3,Y-axis3)). Note that initial position is current pen position.";
+//		//				Console.WriteLine(message);
+//		//			}
+//		//		}
+//		//		else if (shapeName.Equals("drawto"))
+//		//		{
+//		//			if (count == 3)
+//		//			{
+//		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+//		//				{
 
-		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
+//		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
 
-		//				}
-		//				else
-		//				{
-		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
-		//					Console.WriteLine(message);
-		//				}
-		//			}
-		//			else
-		//			{
-		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
-		//				Console.WriteLine(message);
-		//			}
-		//		}
-		//		else if (shapeName.Equals("moveto"))
-		//		{
-		//			if (count == 3)
-		//			{
-		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
-		//				{
-		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
+//		//				}
+//		//				else
+//		//				{
+//		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
+//		//					Console.WriteLine(message);
+//		//				}
+//		//			}
+//		//			else
+//		//			{
+//		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: drawto(X-axis2,Y-axis2). Note that initial points is current pen position.";
+//		//				Console.WriteLine(message);
+//		//			}
+//		//		}
+//		//		else if (shapeName.Equals("moveto"))
+//		//		{
+//		//			if (count == 3)
+//		//			{
+//		//				if (IsNumeric(code[1].Trim()) && IsNumeric(code[2].Trim()))
+//		//				{
+//		//					message = "Success :- " + code[0] + "(" + code[1] + "," + code[2] + ") is correct syntax and parameter.";
 
 
-		//				}
-		//				else
-		//				{
-		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: moveto(X-axis,Y-axis)";
-		//					Console.WriteLine(message);
-		//				}
-		//			}
-		//			else
-		//			{
-		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: move to (X-axis,Y-axis)";
-		//				Console.WriteLine(message);
+//		//				}
+//		//				else
+//		//				{
+//		//					message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: moveto(X-axis,Y-axis)";
+//		//					Console.WriteLine(message);
+//		//				}
+//		//			}
+//		//			else
+//		//			{
+//		//				message = "Error :- Invalid Parameter near " + code[0] + " Please check and run the program again. Example: move to (X-axis,Y-axis)";
+//		//				Console.WriteLine(message);
 
-		//			}
-		//		}
-		//		else if (shapeName.Equals("reset"))
-		//		{
+//		//			}
+//		//		}
+//		//		else if (shapeName.Equals("reset"))
+//		//		{
 
-		//			message = "Success: Command Reset is Correct syntax";
+//		//			message = "Success: Command Reset is Correct syntax";
 
-		//		}
-		//		else if (shapeName.Equals("clear"))
-		//		{
-		//			//					message = "Success :- Clear command found";
-		//			message = "Error :- Command found but please enter " + code[0] + " in command line below.";
-		//			Console.WriteLine(message);
-		//		}
+//		//		}
+//		//		else if (shapeName.Equals("clear"))
+//		//		{
+//		//			//					message = "Success :- Clear command found";
+//		//			message = "Error :- Command found but please enter " + code[0] + " in command line below.";
+//		//			Console.WriteLine(message);
+//		//		}
 				
-		//	}
-		//	else
-		//	{
-		//		message = "Error :- Invalid Syntax. " + code[0] + " Please check and run the program again.";
-		//		Console.WriteLine(message);
-		//	}
-		//	return message;
-		//}
+//		//	}
+//		//	else
+//		//	{
+//		//		message = "Error :- Invalid Syntax. " + code[0] + " Please check and run the program again.";
+//		//		Console.WriteLine(message);
+//		//	}
+//		//	return message;
+//		//}
 			
-		}
+//		}
 	//public string Compiless(string line)
 	//{
 

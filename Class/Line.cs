@@ -15,11 +15,11 @@ namespace CPaint.Class
 		/// <summary>
 		/// Initial point X-axis 
 		/// </summary>
-		public int InitX { get; set; }
+		public int x1 { get; set; }
 		/// <summary>
 		/// Initial point Y-axis 
 		/// </summary>
-		public int InitY { get; set; }
+		public int y1 { get; set; }
 		/// <summary>
 		/// Another point X-axis 
 		/// </summary>
@@ -36,7 +36,7 @@ namespace CPaint.Class
 		public override void Draw(Graphics surface)
 		{
 			Pen myPen = new Pen(Color.Black, 2);
-			surface.DrawLine(myPen, InitX, InitY, X2, Y2);
+			surface.DrawLine(myPen, x1, y1, X2, Y2);
 		}
 	}
 }

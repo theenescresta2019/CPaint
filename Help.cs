@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace CPaint
 {
+	/// <summary>
+	/// Help class to display help keywords 
+	/// </summary>
 	public partial class Help : Form
 	{
+		/// <summary>
+		/// help class 
+		/// </summary>
 		public Help()
 		{
 			InitializeComponent();
